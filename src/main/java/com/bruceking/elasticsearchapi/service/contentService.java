@@ -8,6 +8,9 @@ import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,6 +28,17 @@ public class contentService {
 
     public Boolean parseContent(String keyword) throws IOException {
         List<Content> list = new HtmlParseUtil().parseJD(keyword);
+
+
+        //判断数据库是否创建
+        GetIndexRequest getrequest = new GetIndexRequest("goods");
+        boolean exists = restHighLevelClient.indices().exists(getrequest, RequestOptions.DEFAULT);
+        System.out.println(exists);
+        if (!exists){
+            CreateIndexRequest createRequest = new CreateIndexRequest("goods");
+            CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(createRequest, RequestOptions.DEFAULT);
+            System.out.println(createIndexResponse);
+        }
 
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.timeout("2m");
