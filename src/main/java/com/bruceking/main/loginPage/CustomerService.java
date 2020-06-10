@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class CustomerService implements UserDetailsService {
     @Autowired
-    private customerDao customerDao;//忽略该错误
+    private customerDao customerDao;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

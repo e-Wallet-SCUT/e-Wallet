@@ -2,12 +2,20 @@ package com.bruceking.main.loginPage;
 
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //customer的一个实体类
-
+@Data
+@Component
+@NoArgsConstructor
+@AllArgsConstructor
 public class customer {
     private int customer_id;
     private String customer_name;
