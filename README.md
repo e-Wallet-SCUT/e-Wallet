@@ -80,5 +80,5 @@ public class MainApplication{
 
 }
 ```
-目前已经使用的端口号有80，8080
+目前已经使用的端口号有80，8080.
 
