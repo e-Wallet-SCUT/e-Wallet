@@ -1,39 +1,39 @@
 package com.bruceking.main.indexPage;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.bruceking.main.userInfo.userInfoService;
+import com.bruceking.redis.redisComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@ComponentScan("com.bruceking.redis") /**Scan到redis**/
 public class indexController {
+
+    @Autowired
+    private userInfoService userInfoService;
+    @Autowired
+    private redisComponent redisComponent;
+
+
     @RequestMapping("/info")
     @ResponseBody
     public String UserInfo(){
-        String currentUser = "";
-        Object principl = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principl instanceof UserDetails) {
-            currentUser = ((UserDetails)principl).getUsername();
-        }else {
-            currentUser = principl.toString();
-        }
+        String currentUser = userInfoService.getCurrentUser();
         return currentUser;
     }
 
     @RequestMapping("/")
     public String index(Model model){
-        String currentUser = "";
-        Object principl = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principl instanceof UserDetails) {
-            currentUser = ((UserDetails)principl).getUsername();
-        }else {
-            currentUser = principl.toString();
-        }
+        String currentUser = userInfoService.getCurrentUser();
+
         if (currentUser == "anonymousUser"){
             model.addAttribute("logined",true);
         }else {
@@ -44,6 +44,16 @@ public class indexController {
         }
 
         return "index";
+    }
+
+
+    @RequestMapping("/testRedis")
+    @ResponseBody
+    public Map testRedis(@RequestParam("key") String key, @RequestParam("value") String value, @RequestParam("time") long time){
+        redisComponent.setKey(key, value, time);
+        Map<String,Object> map = new HashMap<>();
+        map.put("result", redisComponent.getKey(key));
+        return map;
     }
 
 }

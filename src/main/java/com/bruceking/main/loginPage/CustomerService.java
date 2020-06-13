@@ -1,6 +1,7 @@
 package com.bruceking.main.loginPage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -38,7 +39,4 @@ public class CustomerService implements UserDetailsService {
         authList.add(new SimpleGrantedAuthority("ROLE_"+"USER")); //将所有权限设为用户
         return authList;
     }
-
-
-
 }
