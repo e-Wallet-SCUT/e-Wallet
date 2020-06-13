@@ -19,6 +19,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         logger.info("登录成功");
+        logger.info(authentication.getPrincipal().toString());
+        logger.info(authentication.toString());
+//        org.springframework.security.authentication.UsernamePasswordAuthenticationToken@42bfbbae: Principal: org.springframework.security.core.userdetails.User@6a68dc6: Username: user1; Password: [PROTECTED]; Enabled: true; AccountNonExpired: true; credentialsNonExpired: true; AccountNonLocked: true; Granted Authorities: ROLE_USER; Credentials: [PROTECTED]; Authenticated: true; Details: org.springframework.security.web.authentication.WebAuthenticationDetails@43458: RemoteIpAddress: 0:0:0:0:0:0:0:1; SessionId: BBAB1F265C50578D0E8AB7B2A76F4CC4; Granted Authorities: ROLE_USER
 
         String  redirectUrl = "/"; //缺省的登陆成功页面
         SavedRequest savedRequest = (SavedRequest) httpServletRequest.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
