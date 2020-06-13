@@ -25,18 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return manager;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/", "/assets/**","/testRedis").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()).httpBasic().and().logout().logoutUrl("/logout");
-        http.addFilterAt(UsernamePasswordCode(), UsernamePasswordAuthenticationFilter.class);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -52,12 +40,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customerService);
     }
 
+    @Autowired
+    CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
     @Bean
     UsernamePasswordCode UsernamePasswordCode() throws Exception {
         UsernamePasswordCode filter = new UsernamePasswordCode();
         filter.setAuthenticationManager(authenticationManagerBean());
+        filter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
         return filter;
     }
 
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/", "/assets/**","/testRedis").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll().successHandler(customAuthenticationSuccessHandler)).httpBasic().and().logout().logoutUrl("/logout");
+        http.addFilterAt(UsernamePasswordCode(), UsernamePasswordAuthenticationFilter.class);
+    }
 
 }
