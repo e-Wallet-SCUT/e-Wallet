@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -93,6 +94,54 @@ public class redisComponent {
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @param setName
+     * @param setValue
+     * @param time
+     */
+    public void setSet(String setName, long time, String... setValue){
+        try {
+            if (setValue.length > 0 && setValue != null){
+                stringRedisTemplate.opsForSet().add(setName,setValue);
+                setTimeLimit(setName,time);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     *
+     * @param setName
+     * @param setValue
+     * @return
+     */
+    public boolean checkSet(String setName,String setValue){
+        try {
+            return stringRedisTemplate.opsForSet().isMember(setName,setValue);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    /**
+     *
+     * @param setName
+     * @return
+     */
+    public Set<String> getSet(String setName){
+        try {
+            return stringRedisTemplate.opsForSet().members(setName);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 

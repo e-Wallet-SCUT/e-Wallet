@@ -1,7 +1,9 @@
 package com.bruceking.main.loginPage;
 
+import com.bruceking.redis.redisComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -16,19 +18,31 @@ import java.io.IOException;
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private com.bruceking.redis.redisComponent redisComponent;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        logger.info("登录成功");
-        logger.info(authentication.getPrincipal().toString());
-        logger.info(authentication.toString());
-//        org.springframework.security.authentication.UsernamePasswordAuthenticationToken@42bfbbae: Principal: org.springframework.security.core.userdetails.User@6a68dc6: Username: user1; Password: [PROTECTED]; Enabled: true; AccountNonExpired: true; credentialsNonExpired: true; AccountNonLocked: true; Granted Authorities: ROLE_USER; Credentials: [PROTECTED]; Authenticated: true; Details: org.springframework.security.web.authentication.WebAuthenticationDetails@43458: RemoteIpAddress: 0:0:0:0:0:0:0:1; SessionId: BBAB1F265C50578D0E8AB7B2A76F4CC4; Granted Authorities: ROLE_USER
+        String[] detail2List = authentication.getDetails().toString().split(": ");
+        String sessionID = detail2List[detail2List.length-1];
+        logger.info(sessionID);
+        redisComponent.setSet(sessionID,600,authentication.getName());
+
 
         String  redirectUrl = "/"; //缺省的登陆成功页面
         SavedRequest savedRequest = (SavedRequest) httpServletRequest.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
         if(savedRequest != null) {
+            logger.info(savedRequest.getRedirectUrl());
             redirectUrl =   savedRequest.getRedirectUrl();
             httpServletRequest.getSession().removeAttribute("SPRING_SECURITY_SAVED_REQUEST");
         }
+//        String requestReferer = httpServletRequest.getHeader("Referer");
+//        logger.info(httpServletRequest.getRequestURI());
+//        logger.info(requestReferer);
+//        logger.info(String.valueOf(httpServletRequest.getSession().getAttributeNames()));
+//        if (requestReferer!=null){
+//            redirectUrl = requestReferer;
+//        }
         httpServletResponse.sendRedirect(redirectUrl);
 
     }

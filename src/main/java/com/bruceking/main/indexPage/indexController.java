@@ -47,12 +47,11 @@ public class indexController {
     }
 
 
-    @RequestMapping("/testRedis")
+    @RequestMapping("/getSessionID")
     @ResponseBody
-    public Map testRedis(@RequestParam("key") String key, @RequestParam("value") String value, @RequestParam("time") long time){
-        redisComponent.setKey(key, value, time);
+    public Map testRedis(@RequestParam("key") String key){
         Map<String,Object> map = new HashMap<>();
-        map.put("result", redisComponent.getKey(key));
+        map.put("result", redisComponent.getSet(key));
         return map;
     }
 

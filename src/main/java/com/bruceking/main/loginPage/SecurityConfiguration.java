@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customerService);
     }
 
-    @Autowired
+    @Autowired(required = false)
     CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
@@ -56,13 +56,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/", "/assets/**","/testRedis").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll().successHandler(customAuthenticationSuccessHandler)).httpBasic().and().logout().logoutUrl("/logout");
+            .authorizeRequests()
+            .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/", "/assets/**","/getSessionID").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin(form -> form
+                    .loginPage("/login")
+                    .permitAll().successHandler(customAuthenticationSuccessHandler)).httpBasic().and().logout().logoutUrl("/logout");
         http.addFilterAt(UsernamePasswordCode(), UsernamePasswordAuthenticationFilter.class);
     }
 
