@@ -110,6 +110,7 @@
 
 <!--    个人信息页-->
     <main class="lyear-layout-content" id="components">
+<!--      个人信息组件-->
         <script type="x-template" id="userInfoTem">
           <div class="container-fluid">
 
@@ -152,48 +153,9 @@
 
           </div>
         </script>
+<!--      -->
+
         <component :is="comName"></component>
-<!--      <user-info></user-info>-->
-<!--      <div class="container-fluid">-->
-
-<!--        <div class="row">-->
-<!--          <div class="col-lg-12">-->
-<!--            <div class="card">-->
-<!--              <div class="card-body">-->
-<!--                <hr>-->
-<!--                <form method="post" action="#" class="site-form">-->
-<!--                  <div class="form-group">-->
-<!--                    <label for="username">用户名</label>-->
-<!--                    <input type="text" class="form-control" name="username" id="username" v-bind:value="username" disabled="disabled" />-->
-<!--                  </div>-->
-<!--                  <div class="form-group">-->
-<!--                    <label for="name">姓名</label>-->
-<!--                    <input type="text" class="form-control" name="username" id="name" v-bind:value="name" disabled="disabled" />-->
-<!--                  </div>-->
-<!--                  <div class="form-group">-->
-<!--                    <label for="mobile">手机号</label>-->
-<!--                    <input type="text" class="form-control" name="username" id="mobile" v-bind:value="mobile" v-bind:disabled="disable" />-->
-<!--                  </div>-->
-<!--                  <div class="form-group">-->
-<!--                    <label for="email">邮箱</label>-->
-<!--                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="请输入正确的邮箱地址" v-bind:value="email" v-bind:disabled="disable">-->
-<!--                    <small id="emailHelp" class="form-text text-muted">请保证您填写的邮箱地址是正确的。</small>-->
-<!--                  </div>-->
-<!--                  <div class="form-group">-->
-<!--                    <label for="remark">地址</label>-->
-<!--                    <textarea class="form-control" name="remark" id="remark" rows="2" v-bind:value="address" v-bind:disabled="disable"></textarea>-->
-<!--                  </div>-->
-<!--                  <button type="button" class="btn btn-primary" id="update" v-on:click="changeBtn" v-bind:disabled="!disable">修改</button>-->
-<!--                  <button type="submit" class="btn btn-primary" id="save" v-bind:disabled="disable" v-on:click="saveBtn">保存</button>-->
-<!--                </form>-->
-
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-
-<!--      </div>-->
 
     </main>
 
