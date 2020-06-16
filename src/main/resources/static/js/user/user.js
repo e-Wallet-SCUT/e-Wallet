@@ -28,7 +28,18 @@ Vue.component('userInfo', {
             this.disable = false
         },
         saveBtn(){
-            this.disable = true
+            // this.disable = true
+            // const data = {"mobile":document.getElementById("mobile").value,"email":document.getElementById("email").value,"address":document.getElementById("address").value}
+            const data = new FormData()
+            data.append("mobile",document.getElementById("mobile").value)
+            data.append("email",document.getElementById("email").value)
+            data.append("address",document.getElementById("address").value)
+            axios.post("/updateUserInfo", data).then(
+                r=>{
+                    this.disable = true
+                    this.getUserInfo()
+                }
+            )
         }
     },
     mounted(){
@@ -45,4 +56,3 @@ new Vue({
         comName:""
     }
 })
-// new Vue({ el: '#components' })

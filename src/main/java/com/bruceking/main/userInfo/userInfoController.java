@@ -4,10 +4,7 @@ import com.bruceking.main.loginPage.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.HashMap;
@@ -49,16 +46,13 @@ public class userInfoController {
         return "userPage";
     }
 
-    @RequestMapping("/updateUserInfo")
+    @RequestMapping(value = "/updateUserInfo",method = RequestMethod.POST)
     @ResponseBody
-    public void updateUserInfo(@RequestParam("name") String name,
-                                 @RequestParam("age") String age,
-                                 @RequestParam("sex") String sex,
+    public void updateUserInfo(
                                  @RequestParam("mobile") String mobile,
                                  @RequestParam("email") String email,
-                                 @RequestParam("address") String address,
-                                 @RequestParam("date") String dateString){
-        Date sqlDate= Date.valueOf(dateString);
-        userInfoService.updateUserInfo(userInfoService.getCurrentUser(),name,age,sex,mobile,email,address,sqlDate);
+                                 @RequestParam("address") String address
+    ){
+        userInfoService.updateUserInfo(userInfoService.getCurrentUser(),mobile,email,address);
     }
 }
