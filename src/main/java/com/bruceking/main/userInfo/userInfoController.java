@@ -55,4 +55,5 @@ public class userInfoController {
     ){
         userInfoService.updateUserInfo(userInfoService.getCurrentUser(),mobile,email,address);
     }
+
 }
