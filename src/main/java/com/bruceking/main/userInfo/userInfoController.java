@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 //@ResponseBody
@@ -17,12 +19,32 @@ public class userInfoController {
     @Autowired
     private userInfoService userInfoService;
 
-    @RequestMapping("/userInfo")
-    public String getUserInfo(Model model){
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public Map<String,Object> getUserInfo(){
         //获取userInfo
-        customer userInfo = userInfoService.getUserInfo(userInfoService.getCurrentUser());
-        model.addAttribute("userInfo",userInfo);
-        return "userInfo";
+        Map<String,Object> map = new HashMap<>();
+        Map<String,String> userInfoMap = new HashMap<>();
+        try {
+            customer userInfo = userInfoService.getUserInfo(userInfoService.getCurrentUser());
+            userInfoMap.put("username",userInfo.getCustomer_username());
+            userInfoMap.put("name",userInfo.getCustomer_name());
+            userInfoMap.put("mobile",userInfo.getCustomer_mobile());
+            userInfoMap.put("email",userInfo.getCustomer_email());
+            userInfoMap.put("address",userInfo.getCustomer_address());
+            map.put("msg","success");
+            map.put("result",userInfoMap);
+        }catch (NullPointerException e){
+            map.put("msg","failure");
+        }
+        return map;
+//        model.addAttribute("userInfo",userInfo);
+//        return "userInfo";
+    }
+
+    @RequestMapping("/user")
+    public String userPage(){
+        return "userPage";
     }
 
     @RequestMapping("/updateUserInfo")

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>E-Wallet个人中心</title>
+<link href="css/user/bootstrap.min.css" rel="stylesheet">
+<link href="css/user/materialdesignicons.min.css" rel="stylesheet">
+<link href="css/user/style.min.css" rel="stylesheet">
+</head>
+  
+<body>
+<div class="lyear-layout-web" id="app">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    <aside class="lyear-layout-sidebar">
+      
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+        <a href="/user"><img src="images/logo.jpg" title="EWallet" alt="EWallet" /></a>
+      </div>
+      <div class="lyear-layout-sidebar-scroll"> 
+        
+        <nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+            <li class="nav-item active"> <a href="/user"><i class="mdi mdi-home"></i> 个人中心首页</a> </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 账户管理</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="#">银行卡绑定</a> </li>
+              </ul>
+            </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 账单查询</a>
+              <ul class="nav nav-subnav">
+                <li> <a href="#">待编辑</a> </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+          <p class="copyright">Copyright &copy; 2020. All rights reserved. <a target="_blank">E-Wallet</a></p>
+        </div>
+      </div>
+      
+    </aside>
+    <!--End 左侧导航-->
+    
+    <!--头部信息-->
+    <header class="lyear-layout-header">
+      
+      <nav class="navbar navbar-default">
+        <div class="topbar">
+          
+          <div class="topbar-left">
+            <div class="lyear-aside-toggler">
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+            </div>
+            <span class="navbar-page-title"> 个人中心首页 - 个人信息 </span>
+          </div>
+          
+          <ul class="topbar-right">
+            <li class="dropdown dropdown-profile">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <img class="img-avatar img-avatar-48 m-r-10" src="images/logo.jpg" alt="EWallet" />
+                <span>{{username}} <span class="caret"></span></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+<!--                <li> <a href="lyear_pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a> </li>-->
+                <li> <a href="#"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
+                <li class="divider"></li>
+                <li> <a href="/"><i class="mdi mdi-lock-outline"></i> 返回首页</a> </li>
+                <li class="divider"></li>
+                <li> <a href="/logout"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+              </ul>
+            </li>
+            <!--切换主题配色-->
+		    <li class="dropdown dropdown-skin">
+			  <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
+			  <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
+                <li class="drop-title"><p>主题</p></li>
+                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="site_theme" value="default" id="site_theme_1" checked>
+                    <label for="site_theme_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="dark" id="site_theme_2">
+                    <label for="site_theme_2"></label>
+                  </span>
+                </li>
+			  </ul>
+			</li>
+            <!--切换主题配色-->
+          </ul>
+          
+        </div>
+      </nav>
+      
+    </header>
+    <!--End 头部信息-->
+
+<!--    个人信息页-->
+    <main class="lyear-layout-content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <hr>
+                <form method="post" action="#!" class="site-form">
+                  <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" class="form-control" name="username" id="username" v-bind:value="username" disabled="disabled" />
+                  </div>
+                  <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" class="form-control" name="username" id="name" v-bind:value="name" disabled="disabled" />
+                  </div>
+                  <div class="form-group">
+                    <label for="mobile">手机号</label>
+                    <input type="text" class="form-control" name="username" id="mobile" v-bind:value="mobile" disabled="disabled" />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="请输入正确的邮箱地址" v-bind:value="email" disabled="disabled">
+                    <small id="emailHelp" class="form-text text-muted">请保证您填写的邮箱地址是正确的。</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="remark">地址</label>
+                    <textarea class="form-control" name="remark" id="remark" rows="2" v-bind:value="address" disabled="disabled"></textarea>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="update">修改</button>
+                  <button type="submit" class="btn btn-primary" id="save" disabled="disabled">保存</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+</div>
+<script src="js/axios.min.js" type="application/javascript"></script>
+<script src="js/vue.min.js" type="application/javascript"></script>
+<script src="js/user/user.js" type="application/javascript"></script>
+<script type="text/javascript" src="js/user/jquery.min.js"></script>
+<script type="text/javascript" src="js/user/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/user/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="js/user/main.min.js"></script>
+</body>
+</html>
