@@ -150,7 +150,7 @@
         .one_line {
             display: block;
             height: 1px;
-            border: 0px;
+            border: 0;
             border-top: 1px solid #eeeeee;
             width: 100%;
             margin-left: 20px;
@@ -159,7 +159,6 @@
         .am-header {
             display: -webkit-box;
             display: -ms-flexbox;
-            display: box;
             width: 100%;
             position: relative;
             padding: 7px 0;
@@ -223,16 +222,16 @@
                 <hr class="one_line">
                 <dt>付款方式 ：</dt>
                 <dd>
-                    <input id="pay_type" name="pay_type" />
+                    <input id="pay_type" name="pay_type" disabled="disabled"  th:value="直接付款"/>
                 </dd>
                 <hr class="one_line">
-                <dt>商品描述：</dt>
+                <dt>备注：</dt>
                 <dd>
                     <input id="pay_description" name="pay_description" />
                 </dd>
                 <hr class="one_line">
                 <dt></dt>
-                <dd id="btn-dd">
+                <dd>
 						<span class="new-btn-login-sp">
 							<button class="new-btn-login" type="submit"
                                     style="text-align: center;" id="fk">付 款</button>
@@ -297,7 +296,7 @@
             </dd>
             <hr class="one_line">
             <dt></dt>
-            <dd id="btn-dd">
+            <dd>
 						<span class="new-btn-login-sp">
 							<button class="new-btn-login" type="submit"
                                     style="text-align: center;" onclick="tk()">退 款</button>
@@ -328,7 +327,7 @@
             </dd>
             <hr class="one_line">
             <dt></dt>
-            <dd id="btn-dd">
+            <dd>
 						<span class="new-btn-login-sp">
 							<button class="new-btn-login" type="submit"
                                     style="text-align: center;"  onclick="tkcx()">退 款 查 询</button>
@@ -356,7 +355,7 @@
             </dd>
             <hr class="one_line">
             <dt></dt>
-            <dd id="btn-dd">
+            <dd>
 						<span class="new-btn-login-sp">
 							<button class="new-btn-login" type="submit"
                                     style="text-align: center;" onclick="jxgb()">交 易 关 闭</button>
@@ -369,7 +368,7 @@
     <!--</form>-->
     <div id="foot">
         <ul class="foot-ul">
-            <li>zgq版权所有 2015-2018 ALIPAY.COM</li>
+            <li>E-Wallet出版</li>
         </ul>
     </div>
 </div>
