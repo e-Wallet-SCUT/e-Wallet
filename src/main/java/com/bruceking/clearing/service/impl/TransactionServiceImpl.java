@@ -43,7 +43,8 @@ public class TransactionServiceImpl implements TransactionService {
      */
     @Override
     public BigDecimal countPosition(Integer entityId) {
-        List<Transaction> allTransaction = this.findAllTransaction();
+        TransactionExample transactionExample = new TransactionExample();
+        List<Transaction> allTransaction = this.transactionMapper.selectByExample(transactionExample);
         BigDecimal entityPosition = new BigDecimal("0");
         for (Transaction transaction : allTransaction) {
             if (transaction.getTransactionEntityLongId() == entityId){
