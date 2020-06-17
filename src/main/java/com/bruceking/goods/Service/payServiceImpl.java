@@ -1,7 +1,7 @@
-//package com.bruceking.goods.Service;
-//
-//import com.bruceking.goods.bean.Pay;
-//
+package com.bruceking.goods.Service;
+
+import com.bruceking.goods.bean.Pay;
+
 //import com.bruceking.goods.mapper.PayMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
