@@ -1,14 +1,21 @@
 package com.bruceking.goods.controller;
 
 
+import com.bruceking.goods.Service.payService;
+import com.bruceking.goods.bean.Pay;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
 
 @RestController
 public class payController {
+
+    @Autowired
+    private payService payService;
+
 
 
     @GetMapping("/payinit/{title}/{price}")
@@ -25,5 +32,27 @@ public class payController {
 
         return modelAndView;
 
+    }
+
+    @RequestMapping("/addpay")
+    public ModelAndView pay(Pay pay){
+
+
+        pay.setPay_date(new Date());
+        System.out.println(pay.toString());
+
+        payService.AddPay(pay);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("msg", "支付成功");
+        mv.setViewName("return");
+        return mv;
+    }
+
+
+    @RequestMapping("/pay/service")
+    public String addPay(@RequestParam(value = "pay_account_id") Integer pay_account_id, Model model){
+        model.addAttribute("pay_account_id",pay_account_id);
+        System.out.println(pay_account_id);
+        return "pay";
     }
 }

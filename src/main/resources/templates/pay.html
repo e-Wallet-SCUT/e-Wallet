@@ -203,13 +203,11 @@
     <form name=alipayment action="/addpay" method=post
           target="_blank">
         <input type="hidden" name="pay_account_id" value=1>
+        <input type="hidden" name="pay_type" value="商城付款">
+        <input type="hidden" name="pay_target_id" value="000000">
         <div id="body1" class="show" name="divcontent">
             <dl class="content">
-                <dt>商户订单号 ：</dt>
-                <dd>
-                    <input id="pay_target_id" name="pay_target_id" />
-                </dd>
-                <hr class="one_line">
+
                 <dt>订单名称 ：</dt>
                 <dd>
                     <input id="pay_name" name="pay_name" th:value="${title}"   />
@@ -375,7 +373,22 @@
 </body>
 
 <script src="../static/js/jquery.min.js"></script>
+<script th:src="@{js/axios.min.js}"></script>
+<script th:src="@{js/vue.min.js}"></script>
 
+<script>
+    // new Vue({
+    //     method:{
+    //
+    //         getID(){
+    //         axios.
+    //
+    //         }
+    //     }
+    // })
+
+
+</script>
 <script type="text/javascript">
     var tabs = document.getElementsByName('tab');
     var contents = document.getElementsByName('divcontent');
