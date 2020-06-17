@@ -27,7 +27,7 @@
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 账户管理</a>
               <ul class="nav nav-subnav">
-                <li> <a @click.prevent="comName='two'">银行卡绑定</a> </li>
+                <li> <a @click.prevent="comName='cardBind'">银行卡绑定</a> </li>
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
@@ -62,7 +62,7 @@
               <span class="navbar-page-title">
                   个人中心
                   <span v-if="comName=='userInfo'"> - 个人信息</span>
-                  <span v-else-if="comName=='two'"> - 第二个</span>
+                  <span v-else-if="comName=='cardBind'"> - 银行卡绑定</span>
               </span>
           </div>
           
@@ -155,7 +155,26 @@
                 <textarea class="form-control" id="address" rows="2" v-bind:value="address" v-bind:disabled="disable"></textarea>
               </div>
               <button type="button" class="btn btn-primary" id="update" v-on:click="changeBtn" v-bind:disabled="!disable">修改</button>
-              <button type="button" class="btn btn-primary" id="save" v-bind:disabled="disable" v-on:click="saveBtn">保存</button>
+              <button type="button" class="btn btn-primary" id="save" v-bind:disabled="disable" data-toggle="modal" data-target="#myModal">保存</button>
+
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">确认</h4>
+                    </div>
+                    <div class="modal-body">
+                      请确认信息无误！
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                      <button type="button" class="btn btn-primary" v-on:click="saveBtn" data-dismiss="modal">点击保存</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </form>
 
           </div>
@@ -167,5 +186,10 @@
   </div>
 </template>
 <!--      -->
+
+<template id="cardBindTem">
+  <h1>银行卡绑定</h1>
+
+</template>
 </body>
 </html>

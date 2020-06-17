@@ -47,9 +47,14 @@ Vue.component('userInfo', {
     },
     template:"#userInfoTem"
 })
-Vue.component('two',{
-    template:'<h1>2</h1>'
+
+
+Vue.component('cardBind',{
+    template:'#cardBindTem'
 })
+
+
+
 new Vue({
     el:"#app",
     data:{
