@@ -21,14 +21,10 @@ public class userInfoService {
     }
 
     public void updateUserInfo(String username,
-                               String name,
-                               String age,
-                               String sex,
                                String mobile,
                                String email,
-                               String address,
-                               Date date){
-        userInfoDao.updateUserInfo(username,name,age,sex,mobile,email,address,date);
+                               String address){
+        userInfoDao.updateUserInfo(username,mobile,email,address);
     }
 
     public String getCurrentUser(){

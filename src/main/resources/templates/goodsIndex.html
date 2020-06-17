@@ -129,46 +129,46 @@
 <script>
 
     new Vue({
-        //  绑定元素
-        el:"#app",
-        data:{
-            keyword:'',
-            aKeyword:'',
-            results:[],//搜索的结果
-        },
-    methods:{
-            searchKey(){
-                var keyword = this.keyword;
-                console.log(keyword);
+            //  绑定元素
+            el:"#app",
+            data:{
+                keyword:'',
+                aKeyword:'',
+                results:[],//搜索的结果
+            },
+            methods:{
+                searchKey(){
+                    var keyword = this.keyword;
+                    console.log(keyword);
 
-                axios.get('search/'+keyword+"/1").then(response=>{
-                    console.log(response.data);
+                    axios.get('search/'+keyword+"/1").then(response=>{
+                        console.log(response.data);
                     this.results = response.data; //数据获得成功 vue双向绑定
 
                 })
-            },
-        searchKey2(aKeyword){
-            this.keyword = aKeyword;
-            console.log(this.aKeyword);
-            this.searchKey();
-        },
+                },
+                searchKey2(aKeyword){
+                    this.keyword = aKeyword;
+                    console.log(this.aKeyword);
+                    this.searchKey();
+                },
 
 
 
-        sortGood(){
+                sortGood(){
 
-                //写法二
-                function sortData(a, b) {
-                    //console.log(b.price);
-                    return b.price - a.price;
+                    //写法二
+                    function sortData(a, b) {
+                        //console.log(b.price);
+                        return b.price - a.price;
+                    }
+                    this.results.sort(sortData);
+
                 }
-                this.results.sort(sortData);
-
-        }
 
 
 
-    }
+            }
         }
 
     )

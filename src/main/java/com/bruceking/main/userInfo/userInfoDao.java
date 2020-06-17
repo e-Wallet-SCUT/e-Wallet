@@ -17,17 +17,13 @@ public interface userInfoDao {
     public customer getUserInfoByUsername(String s);
 
 
-    @Update("update customer set customer_name=#{name}," +
-            "customer_age=#{age},customer_sex=#{sex},customer_mobile=#{mobile}," +
+    @Update("update customer set " +
+            "customer_mobile=#{mobile}," +
             "customer_email=#{email},customer_address=#{address}" +
-            ",customer_date=#{date} where customer_username=#{username}")
+            " where customer_username=#{username}")
     public void updateUserInfo(String username,
-                               String name,
-                               String age,
-                               String sex,
                                String mobile,
                                String email,
-                               String address,
-                               Date date);
+                               String address);
 
 }
