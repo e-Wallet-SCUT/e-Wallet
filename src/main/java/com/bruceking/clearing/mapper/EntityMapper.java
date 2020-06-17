@@ -3,11 +3,8 @@ package com.bruceking.clearing.mapper;
 import com.bruceking.clearing.pojo.Entity;
 import com.bruceking.clearing.pojo.EntityExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface EntityMapper {
     long countByExample(EntityExample example);
 

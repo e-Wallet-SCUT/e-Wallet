@@ -3,11 +3,8 @@ package com.bruceking.clearing.mapper;
 import com.bruceking.clearing.pojo.Transaction;
 import com.bruceking.clearing.pojo.TransactionExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface TransactionMapper {
     long countByExample(TransactionExample example);
 
