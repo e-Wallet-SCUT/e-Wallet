@@ -3,7 +3,11 @@ package com.bruceking.clearing.mapper;
 import com.bruceking.clearing.pojo.Entity;
 import com.bruceking.clearing.pojo.EntityExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+
 
 public interface EntityMapper {
     long countByExample(EntityExample example);
@@ -27,4 +31,7 @@ public interface EntityMapper {
     int updateByPrimaryKeySelective(Entity record);
 
     int updateByPrimaryKey(Entity record);
+
+
+
 }

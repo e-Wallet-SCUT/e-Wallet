@@ -5,10 +5,7 @@ import com.bruceking.clearing.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -43,17 +40,15 @@ public class TransactionController {
         return "showTransaction";
     }
 
-    @GetMapping("/countPosition")
-    public String countPosition(){
-        try {
-            BigDecimal bigDecimal = transactionService.countPosition(1);
-            System.out.println(bigDecimal);
-        }catch (Exception e){
-            e.printStackTrace();
-            return "error";
-        }
-        return "false";
+    @GetMapping("/countPosition/{entityId}")
+    public BigDecimal countPosition(@PathVariable int entityId){
+
+        BigDecimal bigDecimal = transactionService.countPosition(entityId);
+        return bigDecimal;
+
     }
+
+
 
 
 }
