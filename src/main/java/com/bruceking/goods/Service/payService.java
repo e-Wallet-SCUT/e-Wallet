@@ -5,4 +5,5 @@ import com.bruceking.goods.bean.Pay;
 
 public interface payService {
     void AddPay(Pay pay);
+
 }

@@ -1,13 +1,15 @@
 package com.bruceking.trans.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tranfer {
+public class Transfer implements Serializable {
 
     private Integer transfer_id;
-    private Integer transfer_account_id;
+    private Integer transfer_pay_id;
+    private String transfer_pay_bank;
+    private Integer transfer_target_id;
     private String transfer_target_bank;
-    private String transfer_target_id;
     private Float transfer_amount;
     private Date transfer_date;
     private String transfer_description;
@@ -20,12 +22,28 @@ public class Tranfer {
         this.transfer_id = transfer_id;
     }
 
-    public Integer getTransfer_account_id() {
-        return transfer_account_id;
+    public Integer getTransfer_pay_id() {
+        return transfer_pay_id;
     }
 
-    public void setTransfer_account_id(Integer transfer_account_id) {
-        this.transfer_account_id = transfer_account_id;
+    public void setTransfer_pay_id(Integer transfer_pay_id) {
+        this.transfer_pay_id = transfer_pay_id;
+    }
+
+    public String getTransfer_pay_bank() {
+        return transfer_pay_bank;
+    }
+
+    public void setTransfer_pay_bank(String transfer_pay_bank) {
+        this.transfer_pay_bank = transfer_pay_bank;
+    }
+
+    public Integer getTransfer_target_id() {
+        return transfer_target_id;
+    }
+
+    public void setTransfer_target_id(Integer transfer_target_id) {
+        this.transfer_target_id = transfer_target_id;
     }
 
     public String getTransfer_target_bank() {
@@ -34,14 +52,6 @@ public class Tranfer {
 
     public void setTransfer_target_bank(String transfer_target_bank) {
         this.transfer_target_bank = transfer_target_bank;
-    }
-
-    public String getTransfer_target_id() {
-        return transfer_target_id;
-    }
-
-    public void setTransfer_target_id(String transfer_target_id) {
-        this.transfer_target_id = transfer_target_id;
     }
 
     public Float getTransfer_amount() {

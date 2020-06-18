@@ -46,18 +46,22 @@
 
 		<div th:insert="transindex::topbar"></div>
 		<div class="container-fluid">
-			<div th:insert="transindex::sidebar"></div>
-			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-				<form th:action="@{/transpd/correct}" method="post">
-					<div class="form-group">
-						<label>密码</label>
-						<input required="required" name="password" class="form-control" id="exampleInputId" placeholder="请输入支付密码（6位）">
-						<p style="color:#f1892e" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
-					</div>
-					<br/>
-					<button type="submit" class="btn btn-success">确定</button>
-				</form>
-			</main>
+			<div class="row">
+				<div th:insert="transindex::sidebar"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<h2>转账</h2>
+					<form th:action="@{/trans/transpd/correct}" method="post">
+						<div class="form-group">
+							<label>密码</label>
+							<input required="required" name="password" class="form-control" id="exampleInputId" placeholder="请输入支付密码（6位）">
+							<p style="color:#ff0000" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+						</div>
+						<br/>
+						<button type="submit" class="btn btn-success">确定</button>
+					</form>
+				</main>
+			</div>
 		</div>
 
 		<!-- Bootstrap core JavaScript

@@ -6,7 +6,7 @@ public class Account {
     private Integer account_customer_id;
     private String account_number;
     private String account_type;
-    private Integer account_balance;
+    private Float account_balance;
     private String account_password;
     private String account_description;
 
@@ -42,11 +42,11 @@ public class Account {
         this.account_type = account_type;
     }
 
-    public Integer getAccount_balance() {
+    public Float getAccount_balance() {
         return account_balance;
     }
 
-    public void setAccount_balance(Integer account_balance) {
+    public void setAccount_balance(Float account_balance) {
         this.account_balance = account_balance;
     }
 
