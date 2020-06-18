@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ewallet.dao.TransDao">
+    <!--查询余额-->
+    <select id="selectAccount" resultType="Account">
+        select * from account
+        where account_customer_id=#{id} and account_type=#{type}
+    </select>
+    <!--插入转账记录-->
+    <insert id="insertTrans" parameterType="Transfer" keyProperty="transfer_id" useGeneratedKeys="true">
+        insert into tranfer values(#{transfer_id},#{transfer_pay_id},#{transfer_pay_bank},#{transfer_target_bank},#{transfer_target_id},#{transfer_amount},NOW(),#{transfer_description})
+    </insert>
+    <!--更新账户余额-->
+    <update id="updateAccount" parameterType="Transfer">
+        update account set account_balance=account_balance-#{transfer_amount}
+        where account_customer_id=#{transfer_pay_id} and account_type=#{transfer_pay_bank};
+        update account set account_balance=account_balance+#{transfer_amount}
+        where account_customer_id=#{transfer_target_id} and account_type=#{transfer_target_bank}
+    </update>
+</mapper>

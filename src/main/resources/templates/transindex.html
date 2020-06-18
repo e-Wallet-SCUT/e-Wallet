@@ -12,7 +12,7 @@
 		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link th:href="@{css/dashboard.css}" rel="stylesheet">
+		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -58,7 +58,7 @@
 					<div class="sidebar-sticky">
 						<ul class="nav flex-column">
 							<li class="nav-item">
-								<a class="nav-link active" th:href="@{/transindex}">
+								<a class="nav-link active" th:href="@{/index}">
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
 										<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
 										<polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -70,21 +70,44 @@
 					</div>
 				</nav>
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<form th:action="@{/transpd}" method="post">
+					<form th:action="@{/trans/transpd}" method="post">
 						<div class="form-group">
-							<label>转账</label>
-							<input required="required" class="form-control" id="exampleInputId" placeholder="请输入对方钱包的ID">
+							<label>付款ID</label>
+							<input required="required" name="transfer_pay_id" class="form-control" th:value="${payid}"  readonly  >
 						</div>
 						<div class="form-group">
-							<label>汇款金额</label>
-							<input required="required" name="birth" class="form-control" id="exampleInputBirth" placeholder="请输入汇款金额" >
+						<label>汇款金额</label>
+						<input required="required" name="transfer_amount" class="form-control" id="exampleInputBirth" placeholder="请输入汇款金额" >
 						</div>
 						<div class="form-group">
-							<label>付款方式</label>
-							<select name="department.id">
+						<label>付款方式</label>
+						<select name="transfer_pay_bank">
+							<option>零钱</option>
+							<option>中国工商银行</option>
+							<option>中国建设银行</option>
+							<option>中国农业银行</option>
+							<option>中国银行</option>
+						</select>
+						</div>
+						<p style="color:red" th:text="${msgBalance}" th:if="${not #strings.isEmpty(msgBalance)}"></p>
+						<div class="form-group">
+							<label>收款人ID</label>
+							<input required="required" class="form-control" name="transfer_target_id" placeholder="请输入对方钱包的ID">
+						</div>
+						<div class="form-group">
+							<label>收款方式</label>
+							<select name="transfer_target_bank">
 								<option>零钱</option>
-								<option>银行卡</option>
+								<option>中国工商银行</option>
+								<option>中国建设银行</option>
+								<option>中国农业银行</option>
+								<option>中国银行</option>
 							</select>
+						</div>
+						<p style="color:red" th:text="${msgAccount}" th:if="${not #strings.isEmpty(msgAccount)}"></p>
+						<div class="form-group">
+							<label>转账附言</label>
+							<input placeholder="请输入附言" name="transfer_description">
 						</div>
 						<br/>
 						<button type="submit" class="btn btn-success">下一步</button>
@@ -99,17 +122,18 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" th:src="@{js/jquery-3.2.1.slim.min.js}"></script>
-		<script type="text/javascript" th:src="@{js/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
 		<!-- Icons -->
-		<script type="text/javascript" th:src="@{js/feather.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/feather.min.js}"></script>
 		<script>
 			feather.replace()
 		</script>
 
 		<!-- Graphs -->
-		<script type="text/javascript" src="../static/js/trans/Chart.min.js"></script>
+		<script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {
