@@ -34,8 +34,8 @@ public class controller {
 
         //将transfer加入缓存中
         redisTemplate.opsForValue().set("transfer",transfer);
-        Account payAccount = transService.selectAccount(transfer.getTransfer_pay_id(), transfer.getTransfer_pay_bank());
-        Account targetAccount = transService.selectAccount(transfer.getTransfer_target_id(), transfer.getTransfer_target_bank());
+        Account payAccount = transService.selectAccount(transfer.getTransfer_pay_id(), transfer.getTransfer_pay_type());
+        Account targetAccount = transService.selectAccount(transfer.getTransfer_target_id(), transfer.getTransfer_target_type());
 
         //判断余额是否充足及对方账户是否存在
         if(targetAccount == null && payAccount.getAccount_balance() < transfer.getTransfer_amount()) {
@@ -67,12 +67,13 @@ public class controller {
         //从缓存中取出transfer
         Transfer transfer = (Transfer) redisTemplate.opsForValue().get("transfer");
         assert transfer != null;
-        Account account = transService.selectAccount(transfer.getTransfer_pay_id(),transfer.getTransfer_pay_bank());
+        Account account = transService.selectAccount(transfer.getTransfer_pay_id(),transfer.getTransfer_pay_type());
 
         //判断密码是否正确
         if(account.getAccount_password().equals(password)){
-            transService.insertTrans(transfer);     //插入转账记录
-            transService.updateAccount(transfer);   //更新账户余额
+            transService.insertTransfer(transfer);      //插入转账记录
+            transService.updateAccount(transfer);       //更新账户余额
+            transService.insertTransaction(transfer);   //插入交易记录
             return "transok";
         }
         else{

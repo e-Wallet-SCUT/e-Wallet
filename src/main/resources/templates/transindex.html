@@ -82,11 +82,11 @@
 						<div class="form-group">
 						<label>付款方式</label>
 						<select name="transfer_pay_bank">
-							<option>零钱</option>
-							<option>中国工商银行</option>
-							<option>中国建设银行</option>
-							<option>中国农业银行</option>
-							<option>中国银行</option>
+							<option value=3>零钱</option>
+							<option value=1>中国工商银行</option>
+							<option value=5>中国建设银行</option>
+							<option value=4>中国农业银行</option>
+							<option value=6>中国银行</option>
 						</select>
 						</div>
 						<p style="color:red" th:text="${msgBalance}" th:if="${not #strings.isEmpty(msgBalance)}"></p>
@@ -97,11 +97,11 @@
 						<div class="form-group">
 							<label>收款方式</label>
 							<select name="transfer_target_bank">
-								<option>零钱</option>
-								<option>中国工商银行</option>
-								<option>中国建设银行</option>
-								<option>中国农业银行</option>
-								<option>中国银行</option>
+								<option value=3>零钱</option>
+								<option value=1>中国工商银行</option>
+								<option value=5>中国建设银行</option>
+								<option value=4>中国农业银行</option>
+								<option value=6>中国银行</option>
 							</select>
 						</div>
 						<p style="color:red" th:text="${msgAccount}" th:if="${not #strings.isEmpty(msgAccount)}"></p>

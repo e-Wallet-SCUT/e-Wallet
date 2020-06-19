@@ -16,14 +16,20 @@ public class TransServiceImpl implements TransService{
 
     //查询账户
     @Override
-    public Account selectAccount(Integer id, String type) {
+    public Account selectAccount(Integer id, Integer type) {
         return transDao.selectAccount(id,type);
     }
 
     //插入转账记录
     @Override
-    public void insertTrans(Transfer transfer) {
-        transDao.insertTrans(transfer);
+    public void insertTransfer(Transfer transfer) {
+        transDao.insertTransfer(transfer);
+    }
+
+    //插入交易记录
+    @Override
+    public void insertTransaction(Transfer transfer) {
+        transDao.insertTransaction(transfer);
     }
 
     //更新账户余额

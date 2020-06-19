@@ -7,9 +7,11 @@ import org.apache.ibatis.annotations.Param;
 public interface TransDao {
 
     //查询账户
-    Account selectAccount(@Param("id") Integer id, @Param("type") String type);
+    Account selectAccount(@Param("id") Integer id, @Param("type") Integer type);
     //插入转账记录
-    void insertTrans(Transfer transfer);
+    void insertTransfer(Transfer transfer);
+    //插入交易记录
+    void insertTransaction(Transfer transfer);
     //更新账户余额
     void updateAccount(Transfer transfer);
 }
