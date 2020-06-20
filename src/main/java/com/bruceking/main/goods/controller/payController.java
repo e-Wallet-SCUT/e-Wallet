@@ -2,12 +2,15 @@ package com.bruceking.main.goods.controller;
 
 
 import com.bruceking.main.goods.bean.Pay;
+import com.bruceking.main.userInfo.userInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class payController {
@@ -15,14 +18,21 @@ public class payController {
     @Autowired
     private com.bruceking.main.goods.Service.payService payService;
 
+    @Autowired
+    private com.bruceking.main.userInfo.userInfoService userInfoService;
 
 
     @GetMapping("/payinit/{title}/{price}")
     public ModelAndView payinit(@PathVariable("title") String title,
                                 @PathVariable("price") String price){
+        String currentUser = userInfoService.getCurrentUser();
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("username",currentUser);
+
 
         System.out.println("··············");
-        ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.addObject("title",title);
         modelAndView.addObject("price",price);
 
