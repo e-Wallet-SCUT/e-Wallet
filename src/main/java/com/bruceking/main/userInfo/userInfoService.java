@@ -36,6 +36,7 @@ public class userInfoService {
         }else {
             currentUser = principl.toString();
         }
+        System.out.println("currentUser" + currentUser);
         return currentUser;
     }
 }

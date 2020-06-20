@@ -2,6 +2,7 @@ package com.bruceking.main.goods.controller;
 
 
 import com.bruceking.main.goods.bean.Pay;
+import com.bruceking.main.loginPage.customer;
 import com.bruceking.main.userInfo.userInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -31,8 +32,11 @@ public class payController {
         modelAndView.addObject("username",currentUser);
 
 
-        System.out.println("··············");
 
+        customer user = userInfoService.getUserInfo(currentUser);
+
+        String customer_id = Integer.toString(user.getCustomer_id());
+        modelAndView.addObject("user_id",customer_id);
         modelAndView.addObject("title",title);
         modelAndView.addObject("price",price);
 

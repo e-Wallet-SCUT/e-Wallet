@@ -22,7 +22,9 @@
     <link rel="stylesheet" th:href="@{/css/index/style.css}">
     <!-- responsive CSS -->
     <link rel="stylesheet" th:href="@{/css/index/responsive.css}">
+
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -35,7 +37,9 @@
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
             sans-serif;
+
         }
+
 
         .tab-head {
             margin-left: 120px;
@@ -92,6 +96,7 @@
             width: 100%;
             margin: 0 auto;
             font-size: 14px;
+            /*background-color: #faf9f9;*/
         }
 
         .red-star {
@@ -106,6 +111,7 @@
 
         .content {
             margin-top: 5px;
+
         }
 
         .content dt {
@@ -116,6 +122,7 @@
             color: #666;
             font-size: 13px;
             margin-top: 8px;
+
         }
 
         .content dd {
@@ -129,6 +136,7 @@
             border: 0;
             -webkit-border-radius: 0;
             -webkit-appearance: none;
+            color: #0f0f0f;
         }
 
         #foot {
@@ -205,9 +213,13 @@
             font-weight: 300;
             color: #fff;
         }
+        .mainclass{
+            background: #000D47;
+        }
     </style>
 </head>
 <body text=#000000 bgColor="#ffffff" leftMargin=0 topMargin=4>
+
 
 <!--header area start-->
 <div class="header-area wow fadeInDown header-absolate" id="nav" data-0="position:fixed;" data-top-top="position:fixed;top:0;" data-edge-strategy="set">
@@ -275,7 +287,8 @@
 <header class="am-header">
     <h1>E-Wallet网站支付体验入口页</h1>
 </header>
-<div id="main">
+
+<div id="main" class="mainclass">
     <div id="tabhead" class="tab-head">
         <h2 id="tab1" class="selected" name="tab">付 款</h2>
         <h2 id="tab2" name="tab">交 易 查 询</h2>
@@ -285,7 +298,7 @@
     </div>
     <form name=alipayment action="/addpay" method=post
           target="_blank">
-        <input type="hidden" name="pay_account_id" value=1>
+        <input type="hidden" name="pay_account_id" th:value="${user_id}">
         <input type="hidden" name="pay_type" value="商城付款">
         <input type="hidden" name="pay_target_id" value="000000">
         <div id="body1" class="show" name="divcontent">
@@ -459,19 +472,7 @@
 <script th:src="@{/js/axios.min.js}"></script>
 <script th:src="@{/js/vue.min.js}"></script>
 
-<script>
-    // new Vue({
-    //     method:{
-    //
-    //         getID(){
-    //         axios.
-    //
-    //         }
-    //     }
-    // })
 
-
-</script>
 <script type="text/javascript">
     var tabs = document.getElementsByName('tab');
     var contents = document.getElementsByName('divcontent');

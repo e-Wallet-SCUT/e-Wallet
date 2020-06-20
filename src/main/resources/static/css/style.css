@@ -82,6 +82,9 @@ html {
     content: "";
     overflow: hidden
 }
+.headerCon{
+    height: 130px;
+}
 
 #mallSearch legend {
     display: none
@@ -104,7 +107,7 @@ html {
 }
 
 #header {
-    height: 122px;
+    height: 130px;
     margin-top: -26px !important;
     background: #fff;
     min-width: 990px;
@@ -124,7 +127,11 @@ html {
 }
 
 .header-extra {
-    overflow: hidden
+    overflow: hidden;
+
+}
+.relKeyTop{
+    height: auto;
 }
 
 #mallSearch {
@@ -332,7 +339,8 @@ b {
 
 .attrKey {
     white-space: nowrap;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    height: 20px;
 }
 
 .attrs {
@@ -378,7 +386,8 @@ b {
     background-color: #FFF;
     width: 90%;
     padding: 4px 0 0;
-    overflow: hidden
+    overflow: hidden;
+
 }
 
 .attrValues ul {
@@ -446,7 +455,7 @@ b {
 .relKeyTop {
     padding: 4px 0 0;
     margin-left: -13px;
-    height: 16px;
+    height: 20px;
     overflow: hidden;
     width: 100%
 }
