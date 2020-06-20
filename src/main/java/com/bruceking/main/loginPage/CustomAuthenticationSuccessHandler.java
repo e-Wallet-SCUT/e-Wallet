@@ -27,7 +27,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String sessionID = detail2List[detail2List.length-1];
         logger.info(sessionID);
         redisComponent.setSet(sessionID,600,authentication.getName());
-
+        logger.info(redisComponent.getSet(sessionID).toString());
 
         String  redirectUrl = "/"; //缺省的登陆成功页面
         SavedRequest savedRequest = (SavedRequest) httpServletRequest.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
