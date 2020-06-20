@@ -1,5 +1,6 @@
 package com.bruceking.redis;
 
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -79,6 +80,10 @@ public class redisComponent {
         return key == null ? null : stringRedisTemplate.opsForValue().get(key);
     }
 
+    public Object getObjectKey(String key){
+        return key == null ? null : stringRedisTemplate.opsForValue().get(key);
+    }
+
     /**
      * 存入缓存
      * @param key
@@ -96,6 +101,7 @@ public class redisComponent {
             e.printStackTrace();
         }
     }
+
 
     /**
      *

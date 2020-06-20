@@ -3,20 +3,27 @@ package com.bruceking.trans.controller;
 import com.bruceking.trans.entity.Account;
 import com.bruceking.trans.entity.Transfer;
 import com.bruceking.trans.service.TransService;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/trans")
+@ComponentScan("com.bruceking.redis")
 public class controller {
 
     @Autowired
     private TransService transService;
+
+    //@Autowired
+    //private com.bruceking.redis.redisComponent redisComponent;
 
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
