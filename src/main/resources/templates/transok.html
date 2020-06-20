@@ -9,11 +9,31 @@
 		<meta name="author" content="">
 
 		<title>Transtion</title>
+
+		<link rel="stylesheet" th:href="@{/css/index/owl.carousel.min.css}">
+		<!--header icon CSS -->
+		<link rel="icon" th:href="@{/images/index/fabicon.png}">
+		<!-- animations CSS -->
+		<link rel="stylesheet" th:href="@{/css/index/animate.min.css}">
+		<!-- font-awsome CSS -->
+		<link rel="stylesheet" th:href="@{/css/index/font-awesome.min.css}">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" th:href="@{/css/index/bootstrap.min.css}">
+		<!-- mobile menu CSS -->
+		<link rel="stylesheet" th:href="@{/css/index/slicknav.min.css}">
+		<!--css animation-->
+		<link rel="stylesheet" th:href="@{/css/index/animation.css}">
+		<!--css animation-->
+		<link rel="stylesheet" th:href="@{/css/index/material-design-iconic-font.min.css}">
+		<!-- style CSS -->
+		<link rel="stylesheet" th:href="@{/css/index/style.css}">
+		<!-- responsive CSS -->
+		<link rel="stylesheet" th:href="@{/css/index/responsive.css}">
 		<!-- Bootstrap core CSS -->
-		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+		<link th:href="@{/css/trans/bootstrap.min.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<link th:href="@{/css/trans/dashboard.css}" rel="stylesheet">
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -47,7 +67,7 @@
 		<div th:insert="transindex::topbar"></div>
 		<div class="container-fluid">
 			<div class="row">
-				<div th:insert="transindex::sidebar"></div>
+<!--				<div th:insert="transindex::sidebar"></div>-->
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<label>付款成功</label>
@@ -58,18 +78,18 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/jquery-3.2.1.slim.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/bootstrap.min.js}"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" th:src="@{/js/feather.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/feather.min.js}"></script>
 		<script>
 			feather.replace()
 		</script>
 
 		<!-- Graphs -->
-		<script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/Chart.min.js}"></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {

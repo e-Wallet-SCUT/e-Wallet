@@ -7,11 +7,31 @@
 		<meta name="author" content="">
 
 		<title>Transaction</title>
+		<!-- carousel CSS -->
+		<link rel="stylesheet" href="css/index/owl.carousel.min.css">
+		<!--header icon CSS -->
+		<link rel="icon" href="images/index/fabicon.png">
+		<!-- animations CSS -->
+		<link rel="stylesheet" href="css/index/animate.min.css">
+		<!-- font-awsome CSS -->
+		<link rel="stylesheet" href="css/index/font-awesome.min.css">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="css/index/bootstrap.min.css">
+		<!-- mobile menu CSS -->
+		<link rel="stylesheet" href="css/index/slicknav.min.css">
+		<!--css animation-->
+		<link rel="stylesheet" href="css/index/animation.css">
+		<!--css animation-->
+		<link rel="stylesheet" href="css/index/material-design-iconic-font.min.css">
+		<!-- style CSS -->
+		<link rel="stylesheet" href="css/index/style.css">
+		<!-- responsive CSS -->
+		<link rel="stylesheet" href="css/index/responsive.css">
 		<!-- Bootstrap core CSS -->
 		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<link th:href="@{/css/trans/dashboard.css}" rel="stylesheet">
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -42,32 +62,86 @@
 
 	<body>
 		<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" th:fragment="topbar">
-			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#transindex.html">新一代电子钱包</a>
-			<input class="form-control form-control-dark w-100" type="text" placeholder="查询" aria-label="Search">
-			<ul class="navbar-nav px-3">
-				<li class="nav-item text-nowrap">
-					<a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#transindex.html">Sign out</a>
-				</li>
-			</ul>
+
+			<!--header area start-->
+			<div class="header-area wow fadeInDown header-absolate" id="nav" data-0="position:fixed;" data-top-top="position:fixed;top:0;" data-edge-strategy="set">
+				<div class="container">
+					<div class="row">
+						<div class="col-4 d-block d-lg-none">
+							<div class="mobile-menu"></div>
+						</div>
+						<div class="col-4 col-lg-2">
+							<div class="logo-area">
+								<a href="/"><img src="images/logo.jpg" alt=""></a>
+							</div>
+						</div>
+						<div class="col-4 col-lg-8 d-none d-lg-block">
+							<div class="main-menu text-center">
+								<nav>
+									<ul id="slick-nav">
+										<li><a class="scroll" href="#home">home</a>
+											<ul>
+												<li><a href="/">首页</a></li>
+												<li><a href="/trans">转账</a></li>
+												<li><a href="/goodsIndex">网上商城</a></li>
+												<li><a href="">存款</a></li>
+												<li><a href="">借款</a></li>
+												<li><a href="">绑定账户</a></li>
+											</ul>
+										</li>
+										<li><a class="scroll" href="#">About</a>
+										</li>
+										<li><a class="scroll" href="/trans">转账</a></li>
+										<li><a class="scroll" href="/goodsIndex">网上商城</a></li>
+										<li><a class="scroll" href="#">存款</a></li>
+										<li><a class="scroll" href="#">借款</a></li>
+										<li><a class="scroll" href="#">绑定账户</a></li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+
+						<!--                登录-->
+						<div class="col-4 col-lg-2 text-right">
+							<div id="name" class="dropdown btn-group">
+								<button type="button" class="btn btn-info" th:text="${username}"></button>
+								<button id="dLabel" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+<!--									<span class="caret"></span>-->
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><h6><a th:href="${'/user/'+username}">用户中心</a></h6></li>
+									<li><h6><a href="/logout">注销</a></h6></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--header area end-->
+
+<!--			<a class="navbar-brand col-sm-3 col-md-2 mr-0">新一代电子钱包</a>-->
+<!--			<input class="form-control form-control-dark w-100" type="text" placeholder="查询" aria-label="Search">-->
 		</nav>
 
 		<div class="container-fluid">
 			<div class="row">
-				<nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="sidebar">
-					<div class="sidebar-sticky">
-						<ul class="nav flex-column">
-							<li class="nav-item">
-								<a class="nav-link active" th:href="@{/index}">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-										<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-										<polyline points="9 22 9 12 15 12 15 22"></polyline>
-									</svg>
-									转账 <span class="sr-only">(current)</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
+<!--				<nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="sidebar">-->
+<!--					<div class="sidebar-sticky">-->
+<!--						<ul class="nav flex-column">-->
+<!--							<li class="nav-item">-->
+<!--								<a class="nav-link active" th:href="@{/trans}">-->
+<!--									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">-->
+<!--										<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>-->
+<!--										<polyline points="9 22 9 12 15 12 15 22"></polyline>-->
+<!--									</svg>-->
+<!--									转账 <span class="sr-only">(current)</span>-->
+<!--								</a>-->
+<!--							</li>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</nav>-->
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<form th:action="@{/trans/transpd}" method="post">
 						<div class="form-group">
@@ -121,18 +195,18 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery-3.5.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/bootstrap.min.js}"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" th:src="@{/js/feather.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/feather.min.js}"></script>
 		<script>
 			feather.replace()
 		</script>
 
 		<!-- Graphs -->
-		<script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/trans/Chart.min.js}"></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {

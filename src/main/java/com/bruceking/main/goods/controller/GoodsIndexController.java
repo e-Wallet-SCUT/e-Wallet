@@ -21,7 +21,7 @@ public class GoodsIndexController {
     public String index(Model model){
         String currentUser = userInfoService.getCurrentUser();
 
-        if (currentUser == "anonymousUser"){
+        if (currentUser.equals("anonymousUser")){
             model.addAttribute("logined",true);
         }else {
             Map<String, Object> map = new HashMap<>();
