@@ -1,7 +1,11 @@
 /*** uncss> filename: http://localhost:9090/css/global.css ***/
 body, button, fieldset, form, h1, input, legend, li, p, ul {
     margin: 0;
-    padding: 0
+    padding: 0;
+
+}
+body{
+    padding-top: 70px;
 }
 
 body, button, input {

@@ -3,26 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Ewallet电脑网站支付</title>
-    <link rel="stylesheet" th:href="@{/css/index/owl.carousel.min.css}">
-    <!--header icon CSS -->
-    <link rel="icon" th:href="@{/images/index/fabicon.png}">
-    <!-- animations CSS -->
-    <link rel="stylesheet" th:href="@{/css/index/animate.min.css}">
-    <!-- font-awsome CSS -->
-    <link rel="stylesheet" th:href="@{/css/index/font-awesome.min.css}">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" th:href="@{/css/index/bootstrap.min.css}">
-    <!-- mobile menu CSS -->
-    <link rel="stylesheet" th:href="@{/css/index/slicknav.min.css}">
-    <!--css animation-->
-    <link rel="stylesheet" th:href="@{/css/index/animation.css}">
-    <!--css animation-->
-    <link rel="stylesheet" th:href="@{/css/index/material-design-iconic-font.min.css}">
-    <!-- style CSS -->
-    <link rel="stylesheet" th:href="@{/css/index/style.css}">
-    <!-- responsive CSS -->
-    <link rel="stylesheet" th:href="@{/css/index/responsive.css}">
 
+    <script th:src="@{/js/jquery.min.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
 
         * {
@@ -220,69 +206,37 @@
 </head>
 <body text=#000000 bgColor="#ffffff" leftMargin=0 topMargin=4>
 
-
-<!--header area start-->
-<div class="header-area wow fadeInDown header-absolate" id="nav" data-0="position:fixed;" data-top-top="position:fixed;top:0;" data-edge-strategy="set">
-    <div class="container">
-        <div class="row">
-            <div class="col-4 d-block d-lg-none">
-                <div class="mobile-menu"></div>
+<div>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <img alt="Brand" th:src="@{/images/logo.jpg}">
             </div>
-            <div class="col-4 col-lg-2">
-                <div class="logo-area">
-                    <a href="/"><img src="images/logo.jpg" alt=""></a>
-                </div>
-            </div>
-            <div class="col-4 col-lg-8 d-none d-lg-block">
-                <div class="main-menu text-center">
-                    <nav>
-                        <ul id="slick-nav">
-                            <li><a class="scroll" href="#home">home</a>
-                                <ul>
-                                    <li><a href="/">首页</a></li>
-                                    <li><a href="/trans">转账</a></li>
-                                    <li><a href="/goodsIndex">网上商城</a></li>
-                                    <li><a href="">存款</a></li>
-                                    <li><a href="">借款</a></li>
-                                    <li><a href="">绑定账户</a></li>
-                                </ul>
-                            </li>
-                            <li><a class="scroll" href="#">About</a>
-                            </li>
-                            <li><a class="scroll" href="/trans">转账</a></li>
-                            <li><a class="scroll" href="/goodsIndex">网上商城</a></li>
-                            <li><a class="scroll" href="#">存款</a></li>
-                            <li><a class="scroll" href="#">借款</a></li>
-                            <li><a class="scroll" href="#">绑定账户</a></li>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/goodsIndex">网上商城</a></li>
+                    <li><a href="/trans">转账</a></li>
+                    <li><a href="">清算</a></li>
+                    <li><a href="">账单查询</a></li>
+                    <li><a href="">银行卡绑定</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Signed in as <span th:text="${username}"></span><span class="caret" ></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="${'/user/'+username}">用户中心</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">注销</a></li>
                         </ul>
-                    </nav>
-                </div>
+                    </li>
+                </ul>
             </div>
-
-            <!--                登录-->
-            <div class="col-4 col-lg-2 text-right">
-                <div id="name" class="dropdown btn-group">
-                    <!--                        <a class="logibtn gradient-btn" href="#" th:text="${username}" ></a>-->
-                    <!--                        <ul style="display: none" id="userList">-->
-                    <!--                            <li><a href="/userInfo">用户中心</a></li>-->
-                    <!--                            <li><a href="/logout">注销</a></li>-->
-                    <!--                        </ul>-->
-                    <button type="button" class="btn btn-info" th:text="${username}"></button>
-                    <button id="dLabel" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><h6><a th:href="${'/user/'+username}">用户中心</a></h6></li>
-                        <li><h6><a href="/logout">注销</a></h6></li>
-                    </ul>
-                </div>
-            </div>
-
         </div>
-    </div>
+    </nav>
 </div>
-<!--header area end-->
 
 <header class="am-header">
     <h1>E-Wallet网站支付体验入口页</h1>
