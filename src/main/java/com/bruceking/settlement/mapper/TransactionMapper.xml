@@ -13,9 +13,14 @@
             date(transaction_time)=#{date};
     </select>
 
+    <select id="checkSign" resultType="com.bruceking.settlement.bean.Transaction">
+        SELECT * FROM `extransaction` WHERE
+            transaction_sign = #{transaction_sign};
+    </select>
+
     <insert id="insertTx">
-        INSERT INTO `extransaction`(transaction_from_entity_id,transaction_from_entity_account,transaction_to_entity_id,transaction_to_entity_account,transaction_currency_amount,transaction_currency_id,transaction_time)
-        VALUES(#{transaction_from_entity_id},#{transaction_from_entity_account},#{transaction_to_entity_id},#{transaction_to_entity_account},#{transaction_currency_amount},#{transaction_currency_id},#{transaction_time})
+        INSERT INTO `extransaction`(transaction_from_entity_id,transaction_from_entity_account,transaction_to_entity_id,transaction_to_entity_account,transaction_currency_amount,transaction_currency_id,transaction_time,transaction_send_time,transaction_sign)
+        VALUES(#{transaction_from_entity_id},#{transaction_from_entity_account},#{transaction_to_entity_id},#{transaction_to_entity_account},#{transaction_currency_amount},#{transaction_currency_id},#{transaction_time},#{transaction_send_time},#{transaction_sign})
     </insert>
 </mapper>
 

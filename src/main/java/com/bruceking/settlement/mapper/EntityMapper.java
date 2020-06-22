@@ -11,6 +11,10 @@ public interface EntityMapper {
 
     public Entity getEntityByEntityId(Integer entity_id);
 
+    public String getPublicKey(Integer entity_id);
+
+    public String getPrivateKey(Integer entity_id);
+
     public List<Entity> getAllEntity();
 
     public void updateCurrencyAmount(int entity_id, double currency_amount);

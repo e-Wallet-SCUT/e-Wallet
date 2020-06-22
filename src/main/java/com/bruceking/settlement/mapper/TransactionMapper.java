@@ -12,5 +12,7 @@ public interface TransactionMapper {
 
     public List<Transaction> getTxByTime(String date);
 
+    public Transaction checkSign(String transaction_sign);
+
     public void insertTx(Transaction transaction);
 }

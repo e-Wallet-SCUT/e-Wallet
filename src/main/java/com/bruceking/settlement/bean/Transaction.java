@@ -11,6 +11,52 @@ public class Transaction {
     private Double transaction_currency_amount;
     private Integer transaction_currency_id;
     private Date transaction_time;
+    private Date transaction_send_time;
+    private String transaction_sign;
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transaction_id=" + transaction_id +
+                ", transaction_from_entity_id=" + transaction_from_entity_id +
+                ", transaction_from_entity_account='" + transaction_from_entity_account + '\'' +
+                ", transaction_to_entity_id=" + transaction_to_entity_id +
+                ", transaction_to_entity_account='" + transaction_to_entity_account + '\'' +
+                ", transaction_currency_amount=" + transaction_currency_amount +
+                ", transaction_currency_id=" + transaction_currency_id +
+                ", transaction_time=" + transaction_time +
+                ", transaction_send_time=" + transaction_send_time +
+                ", transaction_sign='" + transaction_sign + '\'' +
+                '}';
+    }
+
+    public String getSignString() {
+        return "Transaction{" +
+                "transaction_from_entity_id=" + transaction_from_entity_id +
+                ", transaction_from_entity_account='" + transaction_from_entity_account + '\'' +
+                ", transaction_to_entity_id=" + transaction_to_entity_id +
+                ", transaction_to_entity_account='" + transaction_to_entity_account + '\'' +
+                ", transaction_currency_amount=" + transaction_currency_amount +
+                ", transaction_currency_id=" + transaction_currency_id +
+                ", transaction_send_time=" + transaction_send_time +
+                '}';
+    }
+
+    public Date getTransaction_send_time() {
+        return transaction_send_time;
+    }
+
+    public void setTransaction_send_time(Date transaction_send_time) {
+        this.transaction_send_time = transaction_send_time;
+    }
+
+    public String getTransaction_sign() {
+        return transaction_sign;
+    }
+
+    public void setTransaction_sign(String transaction_sign) {
+        this.transaction_sign = transaction_sign;
+    }
 
     public Integer getTransaction_id() {
         return transaction_id;

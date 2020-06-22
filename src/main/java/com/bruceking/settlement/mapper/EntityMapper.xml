@@ -8,6 +8,16 @@
             entity_id = #{entity_id}
     </select>
 
+    <select id="getPublicKey" resultType="java.lang.String">
+        SELECT public_key FROM `exentity` WHERE
+            entity_id = #{entity_id}
+    </select>
+
+    <select id="getPrivateKey" resultType="java.lang.String">
+        SELECT private_key FROM `exentity` WHERE
+            entity_id = #{entity_id}
+    </select>
+
     <select id="getAllEntity" resultType="com.bruceking.settlement.bean.Entity">
         SELECT * FROM `exentity`
     </select>
