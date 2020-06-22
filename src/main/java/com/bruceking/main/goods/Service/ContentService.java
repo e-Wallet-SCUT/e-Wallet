@@ -82,7 +82,7 @@ public class ContentService {
                     n_title += fragment;
                 }
                 String oldtitle = (String) sourceAsMap.get("title");
-
+                oldtitle = oldtitle.replaceAll("[/]"," ");
                 sourceAsMap.put("oldtitle",oldtitle);
 
 

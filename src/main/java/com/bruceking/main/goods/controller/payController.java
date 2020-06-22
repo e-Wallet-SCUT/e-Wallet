@@ -1,7 +1,10 @@
 package com.bruceking.main.goods.controller;
 
 
+
+import com.bruceking.main.goods.Service.payService;
 import com.bruceking.main.goods.bean.Pay;
+import com.bruceking.main.goods.bean.Transaction;
 import com.bruceking.main.loginPage.customer;
 import com.bruceking.main.userInfo.userInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,10 +21,10 @@ import java.util.Map;
 public class payController {
 
     @Autowired
-    private com.bruceking.main.goods.Service.payService payService;
+    private payService payService;
 
     @Autowired
-    private com.bruceking.main.userInfo.userInfoService userInfoService;
+    private userInfoService userInfoService;
 
 
     @GetMapping("/payinit/{title}/{price}")
@@ -46,16 +50,23 @@ public class payController {
         return modelAndView;
 
     }
-
     @RequestMapping("/addpay")
     public ModelAndView pay(Pay pay){
 
 
         pay.setPay_date(new Date());
-        System.out.println(pay.toString());
 
         payService.AddPay(pay);
         ModelAndView mv = new ModelAndView();
+        int primaryID = payService.SelectTransaction(Integer.parseInt(pay.getPay_account_id()));
+        Transaction transaction = new Transaction();
+        System.out.println(primaryID);
+        transaction.setTransactionEntityLongId(primaryID);
+        transaction.setTransactionLongAmount(BigDecimal.valueOf(pay.getPay_amount()));
+        transaction.setTransactionShortAmount(BigDecimal.valueOf(pay.getPay_amount()));
+        transaction.setTransactionDescription(pay.getPay_description());
+        payService.AddTransaction(transaction);
+
         mv.addObject("msg", "支付成功");
         mv.setViewName("return");
         return mv;

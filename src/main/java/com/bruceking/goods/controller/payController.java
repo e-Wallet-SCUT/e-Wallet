@@ -2,6 +2,8 @@ package com.bruceking.goods.controller;
 
 
 import com.bruceking.goods.Service.payService;
+
+import com.bruceking.clearing.pojo.Transaction;
 import com.bruceking.goods.bean.Pay;
 import com.bruceking.main.loginPage.customer;
 import com.bruceking.main.userInfo.userInfoService;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @RestController
@@ -57,6 +60,14 @@ public class payController {
 
         payService.AddPay(pay);
         ModelAndView mv = new ModelAndView();
+        int primaryID = payService.SelectTransaction(Integer.parseInt(pay.getPay_account_id()));
+        Transaction transaction = new Transaction();
+        transaction.setTransactionEntityLongId(primaryID);
+        transaction.setTransactionLongAmount(BigDecimal.valueOf(pay.getPay_amount()));
+        transaction.setTransactionShortAmount(BigDecimal.valueOf(pay.getPay_amount()));
+        transaction.setTransactionDescription(pay.getPay_description());
+        payService.AddTransaction(transaction);
+
         mv.addObject("msg", "支付成功");
         mv.setViewName("return");
         return mv;
