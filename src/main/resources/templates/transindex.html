@@ -1,133 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
+<html xmlns:th="http://www.thymeleaf.org">
 
-		<title>Transaction</title>
-		<!-- carousel CSS -->
-		<!-- Bootstrap core CSS -->
-		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Transaction</title>
 
-		<!-- Custom styles for this template -->
-		<link th:href="@{/css/trans/dashboard.css}" rel="stylesheet">
-		<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}">
-		<style type="text/css">
-			/* Chart.js */
-			body{
-				padding-top: 70px;
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<script th:src="@{/js/jquery.min.js}"></script>
+<!--	<link rel="stylesheet" href="css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<script src="js/bootstrap.min.js"></script>
+<!--	<style type="text/css">-->
+<!--		.a{-->
+<!--			/*右对齐*/-->
+<!--			display: inline-block;-->
+<!--			float: left;-->
+<!--			width: 300px;-->
+<!--			height: 40px;-->
+<!--			text-align: left;-->
+<!--			margin-left: 15em;-->
+<!--		}-->
+<!--	</style>-->
+
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+	<style type="text/css">
+		/* Chart.js */
+		.a{
+			margin-left: 15em;
+		}
+		@-webkit-keyframes chartjs-render-animation {
+			from {
+				opacity: 0.99
 			}
-			@-webkit-keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
+			to {
+				opacity: 1
 			}
-			
-			@keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
+		}
+
+		@keyframes chartjs-render-animation {
+			from {
+				opacity: 0.99
 			}
-			
-			.chartjs-render-monitor {
-				-webkit-animation: chartjs-render-animation 0.001s;
-				animation: chartjs-render-animation 0.001s;
+			to {
+				opacity: 1
 			}
-		</style>
-	</head>
+		}
 
-	<body>
-<!--		<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" th:fragment="topbar">-->
+		.chartjs-render-monitor {
+			-webkit-animation: chartjs-render-animation 0.001s;
+			animation: chartjs-render-animation 0.001s;
+		}
+	</style>
+</head>
 
-
-<!--&lt;!&ndash;			<a class="navbar-brand col-sm-3 col-md-2 mr-0">新一代电子钱包</a>&ndash;&gt;-->
-<!--&lt;!&ndash;			<input class="form-control form-control-dark w-100" type="text" placeholder="查询" aria-label="Search">&ndash;&gt;-->
-<!--		</nav>-->
-		<div>
-			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-				<div class="container">
-					<div class="navbar-header">
-						<img alt="Brand" th:src="@{/images/logo.jpg}">
-					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							<li><a href="/">首页</a></li>
-							<li><a href="/goodsIndex">网上商城</a></li>
-							<li><a href="/trans">转账</a></li>
-							<li><a href="">清算</a></li>
-							<li><a href="">账单查询</a></li>
-							<li><a href="">银行卡绑定</a></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									Signed in as <span th:text="${username}"></span><span class="caret" ></span>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a th:href="${'/user/'+username}">用户中心</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="/logout">注销</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
+<body>
+	<div>
+		<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<img alt="Brand" th:src="@{/images/logo.jpg}">
 				</div>
-			</nav>
-		</div>
-
-
-		<div class="container-fluid">
-			<div class="row">
-<!--				<nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="sidebar">-->
-<!--					<div class="sidebar-sticky">-->
-<!--						<ul class="nav flex-column">-->
-<!--							<li class="nav-item">-->
-<!--								<a class="nav-link active" th:href="@{/trans}">-->
-<!--									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">-->
-<!--										<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>-->
-<!--										<polyline points="9 22 9 12 15 12 15 22"></polyline>-->
-<!--									</svg>-->
-<!--									转账 <span class="sr-only">(current)</span>-->
-<!--								</a>-->
-<!--							</li>-->
-<!--						</ul>-->
-<!--					</div>-->
-<!--				</nav>-->
-				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<form th:action="@{/trans/transpd}" method="post">
-						<div class="form-group">
-							<label>付款ID</label>
-							<input required="required" name="transfer_pay_id" class="form-control" th:value="${payid}"  readonly  >
-						</div>
-						<div class="form-group">
-						<label>汇款金额</label>
-						<input required="required" name="transfer_amount" class="form-control" id="exampleInputBirth" placeholder="请输入汇款金额" >
-						</div>
-						<div class="form-group">
-						<label>付款方式</label>
-						<select name="transfer_pay_type">
-							<option value=3>零钱</option>
-							<option value=1>中国工商银行</option>
-							<option value=5>中国建设银行</option>
-							<option value=4>中国农业银行</option>
-							<option value=6>中国银行</option>
-						</select>
-						</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="/">首页</a></li>
+						<li><a href="/goodsIndex">网上商城</a></li>
+						<li><a href="/trans">转账</a></li>
+						<li><a href="">清算</a></li>
+						<li><a href="">账单查询</a></li>
+						<li><a href="">银行卡绑定</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								Signed in as <span th:text="${username}"></span><span class="caret" ></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a th:href="${'/user/'+username}">用户中心</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="/logout">注销</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+				<form th:action="@{/trans/transpd}" method="post" class="a">
+					<div class="form-group">
+						<p>
+							付款ID：
+							<input required="required" name="transfer_pay_id" class="form-control" th:value="${payid}" readonly>
+						</p>
+						<br>
+						<p>
+							汇款金额：
+							<input required="required" name="transfer_amount" class="form-control" placeholder="请输入汇款金额">
+						</p>
+						<br>
+						<p>
+							付款方式：
+							<select name="transfer_pay_type">
+								<option value=3>零钱</option>
+								<option value=1>中国工商银行</option>
+								<option value=5>中国建设银行</option>
+								<option value=4>中国农业银行</option>
+								<option value=6>中国银行</option>
+							</select>
+						</p>
+						<br>
 						<p style="color:red" th:text="${msgBalance}" th:if="${not #strings.isEmpty(msgBalance)}"></p>
-						<div class="form-group">
-							<label>收款人ID</label>
-							<input required="required" class="form-control" name="transfer_target_id" placeholder="请输入对方钱包的ID">
-						</div>
-						<div class="form-group">
-							<label>收款方式</label>
+						<p>
+							收款人ID：
+							<input required="required" name="transfer_target_id" class="form-control" placeholder="请输入对方钱包的ID">
+						</p>
+						<br>
+						<p>
+							收款方式：
 							<select name="transfer_target_type">
 								<option value=3>零钱</option>
 								<option value=1>中国工商银行</option>
@@ -135,67 +131,52 @@
 								<option value=4>中国农业银行</option>
 								<option value=6>中国银行</option>
 							</select>
-						</div>
-						<p style="color:red" th:text="${msgAccount}" th:if="${not #strings.isEmpty(msgAccount)}"></p>
-						<div class="form-group">
-							<label>转账附言</label>
-							<input placeholder="请输入附言" name="transfer_description">
-						</div>
-						<br/>
+						</p>
+						<br>
+						<p style="color:#ff0000" th:text="${msgAccount}" th:if="${not #strings.isEmpty(msgAccount)}"></p>
+						<p>
+							转账附言：
+							<input placeholder="请输入附言" class="form-control" name="transfer_description">
+						</p>
+						<br>
 						<button type="submit" class="btn btn-success">下一步</button>
-					</form>
-				</main>
-			</div>
+					</div>
+				</form>
+			</main>
 		</div>
+	</div>
 
-
-
-
-		<!-- Bootstrap core JavaScript
-    ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" th:src="@{/js/jquery-3.5.0.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/trans/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/trans/bootstrap.min.js}"></script>
-
-		<!-- Icons -->
-		<script type="text/javascript" th:src="@{/js/trans/feather.min.js}"></script>
-		<script>
-			feather.replace()
-		</script>
-
-		<!-- Graphs -->
-		<script type="text/javascript" th:src="@{/js/trans/Chart.min.js}"></script>
-		<script>
-			var ctx = document.getElementById("myChart");
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-					datasets: [{
-						data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-						lineTension: 0,
-						backgroundColor: 'transparent',
-						borderColor: '#007bff',
-						borderWidth: 4,
-						pointBackgroundColor: '#007bff'
+	<!-- Graphs -->
+	<script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
+	<script>
+		var ctx = document.getElementById("myChart");
+		var myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+				datasets: [{
+					data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff'
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: false
+						}
 					}]
 				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: false
-							}
-						}]
-					},
-					legend: {
-						display: false,
-					}
+				legend: {
+					display: false,
 				}
-			});
-		</script>
-
-	</body>
+			}
+		});
+	</script>
+</body>
 
 </html>

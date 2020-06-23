@@ -2,45 +2,62 @@
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Transaction</title>
 
-		<title>Transtion</title>
-		<!-- Bootstrap core CSS -->
-		<link th:href="@{/css/trans/bootstrap.min.css}" rel="stylesheet">
-		<link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<!--	<link rel="stylesheet" href="css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<!--	<style type="text/css">-->
+	<!--		.a{-->
+	<!--			/*右对齐*/-->
+	<!--			display: inline-block;-->
+	<!--			float: left;-->
+	<!--			width: 300px;-->
+	<!--			height: 40px;-->
+	<!--			text-align: left;-->
+	<!--			margin-left: 15em;-->
+	<!--		}-->
+	<!--	</style>-->
 
-		<!-- Custom styles for this template -->
-		<link th:href="@{/css/trans/dashboard.css}" rel="stylesheet">
-		<style type="text/css">
-			/* Chart.js */
-			@-webkit-keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+	<style type="text/css">
+		/* Chart.js */
+		.a{
+			margin-left: 15em;
+		}
+		@-webkit-keyframes chartjs-render-animation {
+			from {
+				opacity: 0.99
 			}
-			
-			@keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
+			to {
+				opacity: 1
 			}
-			
-			.chartjs-render-monitor {
-				-webkit-animation: chartjs-render-animation 0.001s;
-				animation: chartjs-render-animation 0.001s;
+		}
+
+		@keyframes chartjs-render-animation {
+			from {
+				opacity: 0.99
 			}
-		</style>
-	</head>
+			to {
+				opacity: 1
+			}
+		}
+
+		.chartjs-render-monitor {
+			-webkit-animation: chartjs-render-animation 0.001s;
+			animation: chartjs-render-animation 0.001s;
+		}
+	</style>
+</head>
 
 	<body>
 
@@ -77,10 +94,8 @@
 	</div>
 		<div class="container-fluid">
 			<div class="row">
-<!--				<div th:insert="transindex::sidebar"></div>-->
-
-				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<label>付款成功</label>
+				<main role="main" class="a">
+					<img th:src="@{/images/transsuccess1.jpg}" />
 				</main>
 			</div>
 		</div>

@@ -22,9 +22,6 @@ public class controller {
     @Autowired
     private TransService transService;
 
-    //@Autowired
-    //private com.bruceking.redis.redisComponent redisComponent;
-
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
 
