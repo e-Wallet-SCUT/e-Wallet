@@ -49,15 +49,14 @@ Vue.component('userInfo', {
 })
 
 
-Vue.component('cardBind',{
-    template:'#cardBindTem'
-})
-
-
-
 new Vue({
     el:"#app",
     data:{
         comName:""
+    },
+    components: {
+        cardBind: guide
     }
 })
+
+
