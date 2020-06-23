@@ -19,6 +19,7 @@ public class userInfoController {
 
     @RequestMapping("/getUserInfo")
     @ResponseBody
+    @CrossOrigin
     public Map<String,Object> getUserInfo(){
         //获取userInfo
         Map<String,Object> map = new HashMap<>();
