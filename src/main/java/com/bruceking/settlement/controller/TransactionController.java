@@ -46,13 +46,16 @@ public class TransactionController {
     public String insert(Transaction transaction){
         Integer entity_id = transaction.getTransaction_from_entity_id();
         RSAPublicKey publicKey = getPublicKey(entityMapper.getPublicKey(entity_id));
-        RSAPrivateKey privateKey = getPrivateKey(entityMapper.getPrivateKey(entity_id));
 
         String signString = transaction.getSignString();
-        String sign = transaction.getTransaction_sign();
-        //--------------------------
-        sign = getSign(signString, privateKey);
+        String sign = transaction.getTransaction_sign().replace(' ','+');
         transaction.setTransaction_sign(sign);
+        //--------------------------
+        if(sign.equals("AutoSign")){
+            RSAPrivateKey privateKey = getPrivateKey(entityMapper.getPrivateKey(entity_id));
+            sign = getSign(signString, privateKey);
+            transaction.setTransaction_sign(sign);
+        }
         //--------------------------
         if (transactionMapper.checkSign(sign) != null){
             return "交易已被插入，插入失败";
