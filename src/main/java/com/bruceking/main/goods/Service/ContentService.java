@@ -37,7 +37,7 @@ public class ContentService {
         SearchRequest searchRequest = new SearchRequest("goods");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
-        searchSourceBuilder.from(pageNo);
+        searchSourceBuilder.from((pageNo-1) * pageSize+1);
         searchSourceBuilder.size(pageSize);
 
         //精确匹配
