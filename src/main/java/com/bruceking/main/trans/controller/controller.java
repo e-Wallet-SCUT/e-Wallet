@@ -46,10 +46,14 @@ public class controller {
     @PostMapping("/transpd")
     public String tran1(Transfer transfer, Map<String,Object> map, Model model){
 
-        //将transfer加入缓存中
-        redisTemplate.opsForValue().set("transfer",transfer);
         Account payAccount = transService.selectAccount(transfer.getTransfer_pay_id(), transfer.getTransfer_pay_type());
         Account targetAccount = transService.selectAccount(transfer.getTransfer_target_id(), transfer.getTransfer_target_type());
+        if(targetAccount != null){
+            transfer.setTransfer_pay_account_id(payAccount.getAccount_id());
+            transfer.setTransfer_target_account_id(targetAccount.getAccount_id());
+            //将transfer加入缓存中
+            redisTemplate.opsForValue().set("transfer",transfer);
+        }
 
         //判断余额是否充足及对方账户是否存在
         if(targetAccount == null && payAccount.getAccount_balance() < transfer.getTransfer_amount()) {
