@@ -1,5 +1,6 @@
 package com.bruceking.settlement.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Transaction {
@@ -8,7 +9,8 @@ public class Transaction {
     private String transaction_from_entity_account;
     private Integer transaction_to_entity_id;
     private String transaction_to_entity_account;
-    private Double transaction_currency_amount;
+    private BigDecimal transaction_currency_amount;
+    private BigDecimal transaction_currency_fee;
     private Integer transaction_currency_id;
     private Date transaction_time;
     private Date transaction_send_time;
@@ -23,6 +25,7 @@ public class Transaction {
                 ", transaction_to_entity_id=" + transaction_to_entity_id +
                 ", transaction_to_entity_account='" + transaction_to_entity_account + '\'' +
                 ", transaction_currency_amount=" + transaction_currency_amount +
+                ", transaction_currency_fee=" + transaction_currency_fee +
                 ", transaction_currency_id=" + transaction_currency_id +
                 ", transaction_time=" + transaction_time +
                 ", transaction_send_time=" + transaction_send_time +
@@ -40,6 +43,22 @@ public class Transaction {
                 ", transaction_currency_id=" + transaction_currency_id +
                 ", transaction_send_time=" + transaction_send_time +
                 '}';
+    }
+
+    public BigDecimal getTransaction_currency_amount() {
+        return transaction_currency_amount;
+    }
+
+    public void setTransaction_currency_amount(BigDecimal transaction_currency_amount) {
+        this.transaction_currency_amount = transaction_currency_amount;
+    }
+
+    public BigDecimal getTransaction_currency_fee() {
+        return transaction_currency_fee;
+    }
+
+    public void setTransaction_currency_fee(BigDecimal transaction_currency_fee) {
+        this.transaction_currency_fee = transaction_currency_fee;
     }
 
     public Date getTransaction_send_time() {
@@ -96,14 +115,6 @@ public class Transaction {
 
     public void setTransaction_to_entity_account(String transaction_to_entity_account) {
         this.transaction_to_entity_account = transaction_to_entity_account;
-    }
-
-    public Double getTransaction_currency_amount() {
-        return transaction_currency_amount;
-    }
-
-    public void setTransaction_currency_amount(Double transaction_currency_amount) {
-        this.transaction_currency_amount = transaction_currency_amount;
     }
 
     public Integer getTransaction_currency_id() {

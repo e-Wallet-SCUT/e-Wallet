@@ -3,6 +3,7 @@ package com.bruceking.settlement.mapper;
 import com.bruceking.settlement.bean.Entity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public interface EntityMapper {
 
     public List<Entity> getAllEntity();
 
-    public void updateCurrencyAmount(int entity_id, double currency_amount);
+    public void updateCurrencyAmount(int entity_id, BigDecimal currency_amount);
 
-    public void updateCurrencyYesterdayStm(int entity_id, double currency_yesterday_stm);
+    public void updateCurrencyYesterdayStm(int entity_id, BigDecimal currency_yesterday_stm);
 }

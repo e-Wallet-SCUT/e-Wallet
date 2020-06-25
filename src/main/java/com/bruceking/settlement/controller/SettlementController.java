@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,17 +31,19 @@ public class SettlementController {
 //    @Scheduled(cron = "0 0 1 ? * * ")
     public String stm(){
         List<Currency> currencies = currencyMapper.getAllCurrency();
-        double exchangeRate[] = new double[currencies.size()+1];
+        BigDecimal exchangeRate[] = new BigDecimal[currencies.size()+1];
         for (int i=1;i<=currencies.size();i++){
             exchangeRate[i] = currencies.get(i-1).getCurrency_er();
         }
 
         List<Entity> entities = entityMapper.getAllEntity();
         int currencyType[] = new int[entities.size()+1];
-        double currencyAmount[] = new double[entities.size()+1];
+        BigDecimal currencyAmount[] = new BigDecimal[entities.size()+1];
+        BigDecimal result[] = new BigDecimal[entities.size()+1];
         for (int i=1;i<=entities.size();i++){
             currencyType[i] = entities.get(i-1).getCurrency_id();
             currencyAmount[i] = entities.get(i-1).getCurrency_amount();
+            result[i] = new BigDecimal(0);
         }
 
         Date date = new Date();
@@ -50,21 +53,21 @@ public class SettlementController {
         date = c.getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //        List<Transaction> txs = transactionMapper.getTxByTime(format.format(date));
-        List<Transaction> txs = transactionMapper.getTxByTime("2020-06-18");
+        List<Transaction> txs = transactionMapper.getTxByTime("2020-06-25");
 
 
-        double result[] = new double[entities.size()+1];
+
         for(Transaction tx : txs){
             int from = tx.getTransaction_from_entity_id(), to = tx.getTransaction_to_entity_id(), type = tx.getTransaction_currency_id();
-            double amount = tx.getTransaction_currency_amount();
-
-            result[from] -= amount / exchangeRate[type] * exchangeRate[currencyType[from]];
-            result[to] += amount / exchangeRate[type] * exchangeRate[currencyType[to]];
+            BigDecimal amount = tx.getTransaction_currency_amount();
+            result[from] = result[from].subtract(amount.divide(exchangeRate[type], 4).multiply(exchangeRate[currencyType[from]]));
+            amount = amount.subtract(tx.getTransaction_currency_fee());
+            result[to] = result[to].add(amount.divide(exchangeRate[type], 4).multiply(exchangeRate[currencyType[to]]));
+            result[1] = result[1].add(tx.getTransaction_currency_fee().divide(exchangeRate[type],4).multiply(exchangeRate[1]));
         }
 
         for(int i=1; i<=entities.size();i++){
-            result[i] = Math.round(result[i] * 1000000) * 0.000001d;
-            entityMapper.updateCurrencyAmount(i, result[i] + currencyAmount[i]);
+            entityMapper.updateCurrencyAmount(i, result[i].add(currencyAmount[i]));
             entityMapper.updateCurrencyYesterdayStm(i, result[i]);
         }
         return "success!";

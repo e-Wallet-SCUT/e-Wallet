@@ -1,10 +1,12 @@
 package com.bruceking.settlement.bean;
 
+import java.math.BigDecimal;
+
 public class Entity {
     private Integer entity_id;
     private String entity_name;
     private Integer currency_id;
-    private double currency_amount;
+    private BigDecimal currency_amount;
     private String public_key;
     private String private_key;
 
@@ -58,12 +60,11 @@ public class Entity {
         this.currency_id = currency_id;
     }
 
-    public double getCurrency_amount() {
+    public BigDecimal getCurrency_amount() {
         return currency_amount;
     }
 
-    public void setCurrency_amount(double currency_amount) {
+    public void setCurrency_amount(BigDecimal currency_amount) {
         this.currency_amount = currency_amount;
     }
-
 }

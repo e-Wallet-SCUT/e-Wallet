@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.security.KeyFactory;
 import java.security.Signature;
 import java.security.interfaces.RSAPrivateKey;
@@ -22,6 +23,8 @@ import java.util.List;
 
 @RestController
 public class TransactionController {
+
+    private final BigDecimal fee_rate = new BigDecimal(0.005);
 
     @Resource
     TransactionMapper transactionMapper;
@@ -50,6 +53,9 @@ public class TransactionController {
         String signString = transaction.getSignString();
         String sign = transaction.getTransaction_sign().replace(' ','+');
         transaction.setTransaction_sign(sign);
+
+        transaction.setTransaction_currency_fee(fee_rate.multiply(transaction.getTransaction_currency_amount()));
+
         //--------------------------
         if(sign.equals("AutoSign")){
             RSAPrivateKey privateKey = getPrivateKey(entityMapper.getPrivateKey(entity_id));

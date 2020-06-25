@@ -19,8 +19,8 @@
     </select>
 
     <insert id="insertTx">
-        INSERT INTO `extransaction`(transaction_from_entity_id,transaction_from_entity_account,transaction_to_entity_id,transaction_to_entity_account,transaction_currency_amount,transaction_currency_id,transaction_time,transaction_send_time,transaction_sign)
-        VALUES(#{transaction_from_entity_id},#{transaction_from_entity_account},#{transaction_to_entity_id},#{transaction_to_entity_account},#{transaction_currency_amount},#{transaction_currency_id},#{transaction_time},#{transaction_send_time},#{transaction_sign})
+        INSERT INTO `extransaction`(transaction_from_entity_id,transaction_from_entity_account,transaction_to_entity_id,transaction_to_entity_account,transaction_currency_amount,transaction_currency_fee,transaction_currency_id,transaction_time,transaction_send_time,transaction_sign)
+        VALUES(#{transaction_from_entity_id},#{transaction_from_entity_account},#{transaction_to_entity_id},#{transaction_to_entity_account},#{transaction_currency_amount},#{transaction_currency_fee},#{transaction_currency_id},#{transaction_time},#{transaction_send_time},#{transaction_sign})
     </insert>
 </mapper>
 
