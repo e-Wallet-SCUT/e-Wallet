@@ -26,6 +26,8 @@ public class SettlementController {
     @Resource
     CurrencyMapper currencyMapper;
 
+    private final int fee_account = 1;
+
     @GetMapping("stm")
     @Transactional
 //    @Scheduled(cron = "0 0 1 ? * * ")
@@ -63,7 +65,7 @@ public class SettlementController {
             result[from] = result[from].subtract(amount.divide(exchangeRate[type], 4).multiply(exchangeRate[currencyType[from]]));
             amount = amount.subtract(tx.getTransaction_currency_fee());
             result[to] = result[to].add(amount.divide(exchangeRate[type], 4).multiply(exchangeRate[currencyType[to]]));
-            result[1] = result[1].add(tx.getTransaction_currency_fee().divide(exchangeRate[type],4).multiply(exchangeRate[1]));
+            result[fee_account] = result[fee_account].add(tx.getTransaction_currency_fee().divide(exchangeRate[type],4).multiply(exchangeRate[fee_account]));
         }
 
         for(int i=1; i<=entities.size();i++){
