@@ -3,6 +3,7 @@ package com.bruceking.main.goods.Service;
 
 
 
+import com.bruceking.main.goods.bean.Account;
 import com.bruceking.main.goods.bean.Transaction;
 import com.bruceking.main.goods.bean.Pay;
 import com.bruceking.main.goods.mapper.PayMapper;
@@ -17,6 +18,8 @@ public class payServiceImpl implements payService {
 
     @Override
     public void AddPay(Pay pay) {
+
+
         payMapper.AddPay(pay);
     }
 
@@ -30,6 +33,11 @@ public class payServiceImpl implements payService {
     @Override
     public int SelectTransaction(int PrimaryID) {
         return payMapper.selectTransaction(PrimaryID);
+    }
+
+    @Override
+    public Account selectAccount(int id) {
+        return payMapper.selectAccount(id);
     }
 
 

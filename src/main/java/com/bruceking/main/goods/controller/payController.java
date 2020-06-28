@@ -3,6 +3,7 @@ package com.bruceking.main.goods.controller;
 
 
 import com.bruceking.main.goods.Service.payService;
+import com.bruceking.main.goods.bean.Account;
 import com.bruceking.main.goods.bean.Pay;
 import com.bruceking.main.goods.bean.Transaction;
 import com.bruceking.main.loginPage.customer;
@@ -56,19 +57,28 @@ public class payController {
 
         pay.setPay_date(new Date());
 
-        payService.AddPay(pay);
+
         ModelAndView mv = new ModelAndView();
         int primaryID = payService.SelectTransaction(Integer.parseInt(pay.getPay_account_id()));
+        Account payAccount = payService.selectAccount(primaryID);
         Transaction transaction = new Transaction();
-        System.out.println(primaryID);
-        transaction.setTransactionEntityLongId(primaryID);
-        transaction.setTransactionLongAmount(BigDecimal.valueOf(pay.getPay_amount()));
-        transaction.setTransactionShortAmount(BigDecimal.valueOf(pay.getPay_amount()));
-        transaction.setTransactionDescription(pay.getPay_description());
-        payService.AddTransaction(transaction);
 
-        mv.addObject("msg", "支付成功");
-        mv.setViewName("return");
+        if(payAccount.getAccount_balance()<pay.getPay_amount()){
+            mv.addObject("msg", "余额不足！");
+            mv.setViewName("return_error");
+        }else {
+
+            transaction.setTransactionEntityLongId(primaryID);
+            transaction.setTransactionLongAmount(BigDecimal.valueOf(pay.getPay_amount()));
+            transaction.setTransactionShortAmount(BigDecimal.valueOf(pay.getPay_amount()));
+            transaction.setTransactionDescription(pay.getPay_description());
+
+            payService.AddPay(pay);
+            payService.AddTransaction(transaction);
+
+            mv.addObject("msg", "支付成功");
+            mv.setViewName("return");
+        }
         return mv;
     }
 

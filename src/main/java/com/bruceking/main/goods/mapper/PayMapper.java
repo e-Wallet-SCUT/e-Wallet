@@ -2,8 +2,10 @@ package com.bruceking.main.goods.mapper;
 
 import com.bruceking.main.goods.bean.Pay;
 import com.bruceking.main.goods.bean.Transaction;
+import com.bruceking.main.goods.bean.Account;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -27,4 +29,8 @@ public interface PayMapper {
 
     @Select("select account_type from account where account_id=#{primaryID}")
     int selectTransaction(int PrimaryID);
+
+    //查询账户
+    @Select("select * from account where account_customer_id=#{id}")
+    Account selectAccount(@Param("id") Integer id);
 }
