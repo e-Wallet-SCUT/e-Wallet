@@ -15,6 +15,10 @@ public class Transfer implements Serializable {
     private Date transfer_date;
     private String transfer_description;
 
+    public void setTransfer_target_type(Integer transfer_target_type) {
+        this.transfer_target_type = transfer_target_type;
+    }
+
     public Integer getTransfer_pay_account_id() {
         return transfer_pay_account_id;
     }
@@ -57,10 +61,6 @@ public class Transfer implements Serializable {
 
     public Integer getTransfer_target_type() {
         return transfer_target_type;
-    }
-
-    public void setTransfer_target_type(Integer transfer_target_type) {
-        this.transfer_target_type = transfer_target_type;
     }
 
     public Float getTransfer_amount() {

@@ -94,45 +94,28 @@
 	<div class="container-fluid">
 		<div class="row">
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-				<form th:action="@{/trans/transpd}" method="post" class="a">
+				<form th:action="@{/withdraw/withdrawpd}" method="post" class="a">
 					<div class="form-group">
-						<p>付款ID:
-							<input style="width: 150px" required="required" name="transfer_pay_id" class="form-control" th:value="${payid}" readonly>
+						<p>钱包ID:
+							<input style="width: 150px" required="required" name="id" class="form-control" th:value="${payid}" readonly>
 						</p>
 						<br>
 						<p><span style="color:red;">* </span>
-							汇款金额：
-							<input style="width: 150px" required="required" name="transfer_amount" class="form-control" placeholder="请输入汇款金额">
+							提现金额：
+							<input style="width: 150px" required="required" name="amount" class="form-control" placeholder="请输入提现金额">
 						</p>
+						<small><span style="color:black;">* </span>手续费为0.01%</small>
+						<br/>
 						<p style="color:red" th:text="${msgBalance}" th:if="${not #strings.isEmpty(msgBalance)}"></p>
 						<br>
 						<p><span style="color:red;">* </span>
-							付款方式：
-							<select name="transfer_pay_type">
-								<option value=3>零钱</option>
+							提现银行卡：
+							<select name="type">
 								<option value=1>中国工商银行</option>
 								<option value=5>中国建设银行</option>
 								<option value=4>中国农业银行</option>
 								<option value=6>中国银行</option>
 							</select>
-						</p>
-						<br>
-						<p><span style="color:red;">* </span>
-							收款人ID：
-							<input style="width: 150px" required="required" name="transfer_target_id" class="form-control" placeholder="请输入对方钱包的ID">
-						</p>
-						<p style="color:#ff0000" th:text="${msgAccount}" th:if="${not #strings.isEmpty(msgAccount)}"></p>
-						<br>
-						<p>
-							收款方式：
-							<select name="transfer_target_type" style="width: 110px">
-								<option value=3>零钱</option>
-							</select>
-						</p>
-						<br>
-						<p>
-							转账附言：
-							<textarea style="width: 300px" rows="4" placeholder="请输入附言" class="form-control" name="transfer_description" ></textarea>
 						</p>
 						<br>
 						<button type="submit" class="btn btn-success">下一步</button>
