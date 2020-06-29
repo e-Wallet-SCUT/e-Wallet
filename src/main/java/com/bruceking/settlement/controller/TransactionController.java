@@ -25,6 +25,7 @@ import java.util.List;
 public class TransactionController {
 
     private final BigDecimal fee_rate = new BigDecimal(0.005);
+    private final BigDecimal maximum_transaction_amount = new BigDecimal(1000000);
 
     @Resource
     TransactionMapper transactionMapper;
@@ -67,12 +68,17 @@ public class TransactionController {
             return "交易已被插入，插入失败";
         }
 
-        if (verify(signString, sign, publicKey)){
-            transaction.setTransaction_time(new Date());
-            transactionMapper.insertTx(transaction);
-            return "插入成功"+transaction.toString();
+        if (!verify(signString, sign, publicKey)){
+            return "签名验证失败，插入失败";
         }
-        return "签名验证失败";
+
+        if(transaction.getTransaction_currency_amount().compareTo(maximum_transaction_amount) == 1){
+            return "交易金额过大，插入失败";
+        }
+
+        transaction.setTransaction_time(new Date());
+        transactionMapper.insertTx(transaction);
+        return "插入成功"+transaction.toString();
     }
 
 
