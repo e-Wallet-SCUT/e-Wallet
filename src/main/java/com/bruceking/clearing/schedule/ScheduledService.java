@@ -34,11 +34,12 @@ public class ScheduledService {
             BigDecimal bigDecimal = transactionService.countPosition(i.getEntityId(), yesterday);
             i.setEntityDayPosition(bigDecimal);
             i.setEntityBalance(i.getEntityBalance().subtract(bigDecimal));
-            result.add(i);
+            entityService.modifyEntity(i);
         }
+
+
         /**
          * 在这里我直接照抄了EntityController中的getAllAmount方法，显然还需要编写将数据更新至entity表中的方法
          */
-//        return null;
     }
 }
