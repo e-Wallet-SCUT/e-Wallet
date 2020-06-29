@@ -3,6 +3,7 @@ package com.bruceking.settlement.controller;
 import com.bruceking.settlement.bean.Currency;
 import com.bruceking.settlement.mapper.CurrencyMapper;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -18,7 +19,7 @@ public class CurrencyController {
         return currencyMapper.getAllCurrency();
     }
 
-    @GetMapping("/update_currency")
+    @PostMapping("/update_currency")
     public Currency update(Currency currency){
         if(currency.getCurrency_id() != null){
             currencyMapper.updateCurrencyExById(currency);

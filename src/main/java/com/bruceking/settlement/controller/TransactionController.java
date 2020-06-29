@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -52,7 +53,7 @@ public class TransactionController {
         return txs;
     }
 
-    @GetMapping("/insert")
+    @PostMapping("/insert")
     public String insert(Transaction transaction){
         Integer entity_id = transaction.getTransaction_from_entity_id();
         RSAPublicKey publicKey = getPublicKey(entityMapper.getPublicKey(entity_id));
