@@ -1,7 +1,8 @@
-package com.e_wallet.springboot.mapper;
+package com.bruceking.bill.mapper;
 
-import com.e_wallet.springboot.bean.Account;
-import com.e_wallet.springboot.bean.transfer;
+
+import com.bruceking.bill.bean.Account;
+import com.bruceking.bill.bean.transfer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

@@ -147,10 +147,94 @@
 								<td th:text="${#dates.format(trans.getTransfer_date(),'yyyy-MM-dd HH:mm')}"></td>
 								<td th:text="${trans.getTransfer_description()}"></td>
 							</tr>
-
 							</tbody>
 						</table>
 					</div>
+					<div>
+<!--						<canvas id="cavsElem">-->
+<!--							你的浏览器不支持canvas，请升级浏览器.浏览器不支持，显示此行文本-->
+<!--						</canvas>-->
+<!--						<script>-->
+<!--							(function () {-->
+<!--								var canvas = document.getElementById('cavsElem'); //获得画布-->
+<!--								var ctx = canvas.getContext('2d'); //注意：2d小写， 3d：webgl-->
+<!--								canvas.width = 1800; //设置标签的属性宽高-->
+<!--								canvas.height = 900;-->
+<!--								// canvas.style.border = '1px solid #000';-->
+
+<!--								var data =[-->
+<!--									{-->
+<!--										"value":.2,-->
+<!--										"color":"red",-->
+<!--										"title":"零钱:￥200"-->
+
+<!--									}, {-->
+<!--										"value":.3,-->
+<!--										"color":"green",-->
+<!--										"title":"工行:￥300"-->
+
+<!--									}, {-->
+<!--										"value":.4,-->
+<!--										"color":"blue",-->
+<!--										"title":"建行:￥400"-->
+
+<!--									}, {-->
+<!--										"value":.1,-->
+<!--										"color":"#ccc",-->
+<!--										"title":"农行:￥100"-->
+
+<!--									}-->
+<!--								];-->
+<!--								var tempAngle = -0.5*Math.PI;-->
+<!--								var x0=700,y0=400;-->
+<!--								var radius=200;-->
+<!--								for( var i=0;i<data.length;i++){-->
+<!--									ctx.beginPath();-->
+<!--									ctx.moveTo(x0,y0);-->
+<!--									ctx.fillStyle=data[i].color;-->
+<!--									var StartAngle = tempAngle;-->
+<!--									var EndAngle = tempAngle+2*Math.PI*data[i].value;-->
+<!--									ctx.arc(x0,y0,radius,StartAngle,EndAngle);-->
+<!--									ctx.fill();-->
+<!--									//绘制百分比文字-->
+<!--									ctx.beginPath();-->
+<!--									var txt = data[i].value*100+'%';-->
+<!--									var x, y ,x1 ,y1;-->
+<!--									var txtAngle = tempAngle+Math.PI*data[i].value-->
+<!--									x=x0+Math.cos(txtAngle)*(radius-90);-->
+<!--									y=y0+Math.sin(txtAngle)*(radius-90);-->
+<!--									ctx.textAlign='center'-->
+<!--									// if(txtAngle>1/2*Math.PI&&tempAngle<3/2*Math.PI){-->
+<!--									//     ctx.textAlign='end';-->
+<!--									// }-->
+<!--									ctx.fillStyle = 'black'; //设置填充颜色为紫色-->
+<!--									ctx.font = '20px "微软雅黑"'; //设置字体-->
+<!--									ctx.fillText(txt,x,y)-->
+
+
+<!--									//绘制type-->
+<!--									ctx.beginPath();-->
+<!--									x1=x0+Math.cos(txtAngle)*(radius+20);-->
+<!--									y1=y0+Math.sin(txtAngle)*(radius+20);-->
+<!--									ctx.textAlign='start';-->
+<!--									if(txtAngle>1/2*Math.PI&&tempAngle<3/2*Math.PI){-->
+<!--										ctx.textAlign='end';-->
+<!--									}-->
+<!--									ctx.fillStyle = 'black'; //设置填充颜色为紫色-->
+<!--									ctx.font = '20px "微软雅黑"'; //设置字体-->
+<!--									ctx.fillText(data[i].title,x1,y1)-->
+
+<!--									tempAngle = EndAngle;-->
+<!--								}-->
+<!--								ctx.stroke(); //描边路径-->
+<!--							}());-->
+<!--						</script>-->
+					</div>
+
+
+					<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+					<div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+
 				</main>
 			</div>
 		</div>
@@ -158,6 +242,86 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
+
+		<script>
+			var xmlhttp=new XMLHttpRequest();
+			var url="../Turnover/"+[[${payid}]];
+			// var url="http://localhost:8080/Turnover/2";
+			var type="GET";//方法
+			xmlhttp.open(type,url,false);//方法，接口，异步
+			xmlhttp.send();
+
+			var result=JSON.parse(xmlhttp.response);
+			id=[[${payid}]];
+			console.log(id);
+			var day2 = new Date();
+			day2.setTime(day2.getTime());
+			var s2 = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+
+
+			window.onload = function () {
+				// var t=[[${dataPoints}]];
+				var chart = new CanvasJS.Chart("chartContainer", {
+					theme: "light2",
+					animationEnabled: true,
+					title: {
+						text: "用户"+[[${payid}]]+"的统计数据"
+					},
+					subtitles: [{
+						text: "截止到"+s2,
+						fontSize: 16
+					}],
+					data: [{
+						type: "pie",
+						indexLabelFontSize: 18,
+						radius: 1300,
+						indexLabel: "{account_type}  {y}",
+						yValueFormatString: "###0.0'￥'",
+						click: explodePie,
+						dataPoints: result
+					}]
+				});
+				chart.render();
+
+				function explodePie(e) {
+					for(var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+						if(i !== e.dataPointIndex)
+							e.dataSeries.dataPoints[i].exploded = false;
+					}
+				}
+
+
+
+				var chart1 = new CanvasJS.Chart("chartContainer1", {
+					animationEnabled: true,
+
+					title:{
+						text:""
+					},
+					axisX:{
+						interval: 1
+					},
+					axisY2:{
+						interlacedColor: "rgba(1,77,101,.2)",
+						gridColor: "rgba(1,77,101,.1)",
+						title: ""
+					},
+					data: [{
+						type: "bar",
+						name: "companies",
+						labels:"account_type",
+						axisYType: "secondary",
+						indexLabel: "{account_type}  {y}",
+						yValueFormatString: "###0.0'￥'",
+						color: "#014D65",
+						dataPoints: result
+					}]
+				});
+				chart1.render();
+
+			}
+		</script>
+		<script th:src="@{/asserts/js/canvasjs.min.js}" ></script>
 		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
 		<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.11.1/dist/popper.js}"></script>
 		<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>

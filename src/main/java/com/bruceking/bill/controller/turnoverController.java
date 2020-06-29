@@ -1,20 +1,24 @@
-package com.e_wallet.springboot.controller;
+package com.bruceking.bill.controller;
 
-import com.e_wallet.springboot.bean.Account;
-import com.e_wallet.springboot.bean.TurnOver;
-import com.e_wallet.springboot.bean.transfer;
-import com.e_wallet.springboot.mapper.transferMapper;
+
+import com.bruceking.bill.bean.Account;
+import com.bruceking.bill.bean.TurnOver;
+import com.bruceking.bill.bean.transfer;
+import com.bruceking.bill.mapper.transferMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @RestController
 public class turnoverController {
     @Autowired
-    transferMapper transferMapper;
+    com.bruceking.bill.mapper.transferMapper transferMapper;
 
     @GetMapping("/Turnover/{id}")
     public List<TurnOver> index(@PathVariable("id") Integer id, Model model){
@@ -52,7 +56,7 @@ public class turnoverController {
 
         for (Account account:payAccount){
 
-            for (transfer transfer: transferMapper.selectTransfer(account.getAccount_id())){
+            for (com.bruceking.bill.bean.transfer transfer: transferMapper.selectTransfer(account.getAccount_id())){
                 switch (account.getAccount_type()){
                     case (1):
                         account1.setY(account1.getY()+transfer.getTransfer_amount());

@@ -1,4 +1,4 @@
-package com.e_wallet.springboot.bean;
+package com.bruceking.bill.bean;
 
 public class Account {
 
