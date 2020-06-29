@@ -34,20 +34,20 @@ public class TransactionController {
     @Resource
     EntityMapper entityMapper;
 
-    @GetMapping("/tx/{Entity_id}")
+    @GetMapping("/transaction/{Entity_id}")
 //    @Cacheable(value = "tx")
     public List<Transaction> getTxByEntityId(@PathVariable("Entity_id") Integer Entity_id){
         List<Transaction> txs =  transactionMapper.getTxByEntityId(Entity_id);
         return txs;
     }
 
-    @GetMapping("/tx/date/{Date}")
+    @GetMapping("/transaction/date/{Date}")
     public List<Transaction> getTxByTime(@PathVariable("Date") String date){
         List<Transaction> txs =  transactionMapper.getTxByTime(date);
         return txs;
     }
 
-    @GetMapping("/tx")
+    @GetMapping("/transaction")
     public List<Transaction> getAllTransaction(){
         List<Transaction> txs =  transactionMapper.getAllTransaction();
         return txs;

@@ -20,13 +20,19 @@ public class CurrencyController {
     }
 
     @PostMapping("/update_currency")
-    public Currency update(Currency currency){
-        if(currency.getCurrency_id() != null){
-            currencyMapper.updateCurrencyExById(currency);
+    public Boolean update(Currency currency){
+        try{
+            if(currency.getCurrency_id() != null){
+                currencyMapper.updateCurrencyExById(currency);
+            }
+            else{
+                currencyMapper.updateCurrencyExByType(currency);
+            }
+            return true;
         }
-        else{
-            currencyMapper.updateCurrencyExByType(currency);
+        catch (Exception e){
+            e.printStackTrace();
         }
-        return currency;
+        return false;
     }
 }
