@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,19 +43,23 @@ public class TransactionServiceImpl implements TransactionService {
      * @return 返回该头寸
      */
     @Override
-    public BigDecimal countPosition(Integer entityId) {
+    public BigDecimal countPosition(Integer entityId, Date date) {
         TransactionExample transactionExample = new TransactionExample();
         List<Transaction> allTransaction = this.transactionMapper.selectByExample(transactionExample);
         BigDecimal entityPosition = new BigDecimal("0");
         for (Transaction transaction : allTransaction) {
-            if (transaction.getTransactionEntityLongId() == entityId){
-                entityPosition = entityPosition.add(transaction.getTransactionLongAmount());
-            }
-            if (transaction.getTransactionEntityShortId() == entityId){
-                entityPosition = entityPosition.subtract(transaction.getTransactionShortAmount());
-            }
-            if (transaction.getTransactionEntityFeeId() == entityId){
-                entityPosition = entityPosition.subtract(transaction.getTransactionFeeAmount());
+            if (transaction.getTransactionDate().getYear() == date.getYear() &&
+                    transaction.getTransactionDate().getMonth() == date.getMonth() &&
+                    transaction.getTransactionDate().getDay() == date.getDay()) {
+                if (transaction.getTransactionEntityLongId() == entityId) {
+                    entityPosition = entityPosition.add(transaction.getTransactionLongAmount());
+                }
+                if (transaction.getTransactionEntityShortId() == entityId) {
+                    entityPosition = entityPosition.subtract(transaction.getTransactionShortAmount());
+                }
+                if (transaction.getTransactionEntityFeeId() == entityId) {
+                    entityPosition = entityPosition.subtract(transaction.getTransactionFeeAmount());
+                }
             }
         }
         return entityPosition;

@@ -1,14 +1,10 @@
-package com.bruceking.clearing.controller;
+package com.bruceking.clearing.schedule;
 
 import com.bruceking.clearing.pojo.Entity;
 import com.bruceking.clearing.service.EntityService;
 import com.bruceking.clearing.service.TransactionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,26 +12,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@RestController
-public class EntityController {
-
-    @Autowired
+@Component
+public class ScheduledService {
     private EntityService entityService;
-
-    @Autowired
     private TransactionService transactionService;
 
-    @GetMapping("/GetAllEntity")
-    public List<Entity> selectByExample(){
-        return entityService.findAllEntity();
-    }
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void schedule(){
 
-
-
-
-
-    @GetMapping("/getAllAmount")
-    public List<Entity> getAllData(){
         List<Entity> entityList = entityService.findAllEntity();
         ArrayList<Entity> result = new ArrayList();
         Date today = new Date();
@@ -50,6 +34,6 @@ public class EntityController {
             result.add(i);
         }
 
-        return result;
+//        return null;
     }
 }

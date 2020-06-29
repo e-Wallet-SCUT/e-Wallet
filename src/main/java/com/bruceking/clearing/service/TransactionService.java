@@ -3,11 +3,12 @@ package com.bruceking.clearing.service;
 import com.bruceking.clearing.pojo.Transaction;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 
 public interface TransactionService {
     void addTransaction(Transaction transaction);
     List<Transaction> findAllTransaction();
-    BigDecimal countPosition(Integer entityId);
+    BigDecimal countPosition(Integer entityId, Date date);
 }
