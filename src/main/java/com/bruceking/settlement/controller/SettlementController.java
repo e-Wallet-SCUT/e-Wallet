@@ -55,7 +55,7 @@ public class SettlementController {
         date = c.getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //        List<Transaction> txs = transactionMapper.getTxByTime(format.format(date));
-        List<Transaction> txs = transactionMapper.getTxByTime("2020-06-25");
+        List<Transaction> txs = transactionMapper.getTxByTime("2020-06-29");
 
 
 

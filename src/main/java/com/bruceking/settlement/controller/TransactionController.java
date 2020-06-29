@@ -46,6 +46,12 @@ public class TransactionController {
         return txs;
     }
 
+    @GetMapping("/tx")
+    public List<Transaction> getAllTransaction(){
+        List<Transaction> txs =  transactionMapper.getAllTransaction();
+        return txs;
+    }
+
     @GetMapping("/insert")
     public String insert(Transaction transaction){
         Integer entity_id = transaction.getTransaction_from_entity_id();

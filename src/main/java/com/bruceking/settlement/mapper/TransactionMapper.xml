@@ -8,6 +8,10 @@
             transaction_from_entity_id = #{entity_id} OR transaction_to_entity_id = #{entity_id}
     </select>
 
+    <select id="getAllTransaction" resultType="com.bruceking.settlement.bean.Transaction">
+        SELECT * FROM `extransaction`
+    </select>
+
     <select id="getTxByTime" resultType="com.bruceking.settlement.bean.Transaction">
         SELECT * FROM `extransaction` WHERE
             date(transaction_time)=#{date};

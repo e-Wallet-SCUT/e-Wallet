@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class CurrencyController {
@@ -13,6 +14,11 @@ public class CurrencyController {
     CurrencyMapper currencyMapper;
 
     @GetMapping("/currency")
+    public List<Currency> getAllCurrency(){
+        return currencyMapper.getAllCurrency();
+    }
+
+    @GetMapping("/update_currency")
     public Currency update(Currency currency){
         if(currency.getCurrency_id() != null){
             currencyMapper.updateCurrencyExById(currency);

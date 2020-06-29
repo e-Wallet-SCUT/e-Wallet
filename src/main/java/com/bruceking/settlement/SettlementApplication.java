@@ -41,13 +41,13 @@ public class SettlementApplication {
             }
         };
     }
-//    @Bean
-//    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> myCustomizer(){
-//        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
-//            @Override
-//            public void customize(ConfigurableWebServerFactory factory) {
-//                factory.setPort(8089);
-//            }
-//        };
-//    }
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> myCustomizer(){
+        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
+            @Override
+            public void customize(ConfigurableWebServerFactory factory) {
+                factory.setPort(8181);
+            }
+        };
+    }
 }

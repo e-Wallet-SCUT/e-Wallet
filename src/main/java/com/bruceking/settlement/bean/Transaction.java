@@ -1,9 +1,12 @@
 package com.bruceking.settlement.bean;
 
+import org.springframework.data.annotation.Id;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Transaction {
+    @Id
     private Integer transaction_id;
     private Integer transaction_from_entity_id;
     private String transaction_from_entity_account;

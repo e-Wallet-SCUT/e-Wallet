@@ -1,8 +1,11 @@
 package com.bruceking.settlement.bean;
 
+import org.springframework.data.annotation.Id;
+
 import java.math.BigDecimal;
 
 public class Entity {
+    @Id
     private Integer entity_id;
     private String entity_name;
     private Integer currency_id;

@@ -1,9 +1,11 @@
 package com.bruceking.settlement.bean;
 
+import org.springframework.data.annotation.Id;
+
 import java.math.BigDecimal;
 
 public class Currency {
-
+    @Id
     private Integer currency_id;
     private String currency_type;
     private BigDecimal currency_er;
