@@ -257,11 +257,10 @@
         <h2 id="tab4" name="tab">退 款 查 询</h2>
         <h2 id="tab5" name="tab">交 易 关 闭</h2>
     </div>
-    <form name=alipayment action="/addpay" method=post
-          target="_blank">
+    <form name=alipayment action="/addpay" method=post target="_blank">
         <input type="hidden" name="pay_account_id" th:value="${user_id}">
         <input type="hidden" name="pay_type" value="商城付款">
-        <input type="hidden" name="pay_target_id" value="000000">
+        <input type="hidden" name="pay_target_id" value="2">
         <div id="body1" class="show" name="divcontent">
             <dl class="content">
 
@@ -289,7 +288,7 @@
                 <dd>
 						<span class="new-btn-login-sp">
 							<button class="new-btn-login" type="submit"
-                                    style="text-align: center;" id="fk">付 款</button>
+                                    style="text-align: center;" id="fk" onclick="disableButton()">付 款</button>
 						</span> <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
                 </dd>
             </dl>
@@ -496,85 +495,9 @@
         });
     }
 
-    function tk() {
-        var WIDTQout_trade_no=$("#WIDTRout_trade_no").val();
-        var WIDTQtrade_no=$("#WIDTRtrade_no").val();
-        var WIDTRrefund_amount=$("#WIDTRrefund_amount").val();
-        var WIDTRrefund_reason=$("#WIDTRrefund_reason").val();
-        var WIDTRout_request_no=$("#WIDTRout_request_no").val();
-
-        $.ajax({
-            type : 'POST',
-            url : '/pay/return',
-            data :{"trade_no":WIDTQtrade_no,
-                "out_trade_no":WIDTQout_trade_no,
-                "refund_amount":WIDTRrefund_amount,
-                "refund_reason":WIDTRrefund_reason,
-                "out_request_no":WIDTRout_request_no},
-            dataType : 'json',
-            async : false,
-            success : function(data) {
-
-                console.log(data);
-                $("#tk").append("返回消息:"+data.alipay_trade_refund_response.msg+"<br/>"
-                    +"返回金额:"+data.alipay_trade_refund_response.refund_fee+"<br/>"
-                    +"E-Wallet交易号:"+data.alipay_trade_refund_response.trade_no+"<br/>"
-                    +"退款时间:"+data.alipay_trade_refund_response.gmt_refund_pay+"<br/>"
-                    +"商户订单号:"+data.alipay_trade_refund_response.out_trade_no);
-
-            }
-        });
+    function disableButton(){
+        alert("支付界面初始化中，请关闭该页面")
     }
 
-    function tkcx() {
-        var WIDRQout_trade_no=$("#WIDRQout_trade_no").val();
-        var WIDRQtrade_no=$("#WIDRQtrade_no").val();
-        var WIDRQout_request_no=$("#WIDRQout_request_no").val();
-
-
-        $.ajax({
-            type : 'POST',
-            url : '/pay/Tkquery',
-            data :{"trade_no":WIDRQtrade_no,
-                "out_trade_no":WIDRQout_trade_no,
-                "out_request_no":WIDRQout_request_no},
-            dataType : 'json',
-            async : false,
-            success : function(data) {
-
-                console.log(data);
-                $("#tkcx").append("返回的结果:"+data.alipay_trade_fastpay_refund_query_response.msg+"<br/>"
-                    +"退款请求号:"+data.alipay_trade_fastpay_refund_query_response.out_request_no+"<br/>"
-                    +"退款金额:"+data.alipay_trade_fastpay_refund_query_response.refund_amount+"<br/>"
-                    +"总金额:"+data.alipay_trade_fastpay_refund_query_response.total_amount);
-
-            }
-        });
-    }
-
-    function jxgb() {
-
-        var WIDTCout_trade_no=$("#WIDTCout_trade_no").val();
-        var WIDTCtrade_no=$("#WIDTCtrade_no").val();
-
-        $.ajax({
-            type : 'POST',
-            url : '/pay/close',
-            data :{"trade_no":WIDTCtrade_no,
-                "out_trade_no":WIDTCout_trade_no},
-            dataType : 'json',
-            async : false,
-            success : function(data) {
-
-                console.log(data);
-                /* $("#jxgb").append("返回消息:"+data.alipay_trade_refund_response.msg+"<br/>"
-                     +"返回金额:"+data.alipay_trade_refund_response.refund_fee+"<br/>"
-                     +"E-Wallet交易号:"+data.alipay_trade_refund_response.trade_no+"<br/>"
-                     +"退款时间:"+data.alipay_trade_refund_response.gmt_refund_pay+"<br/>"
-                     +"商户订单号:"+data.alipay_trade_refund_response.out_trade_no);*/
-
-            }
-        });
-    }
 </script>
 </html>

@@ -18,20 +18,6 @@ Vue.component("return", {
 
     },
 
-    methods:{ //跳转页面
-
-        hreftwo(){
-
-            this.$router.push({ path:'/'  })
-
-        }
-
-    },
-
-
-    created(){
-        this.hreftwo()
-    }
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="2;url=/">
+<!--    <meta http-equiv="refresh" content="2;url=/">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>结果</title>
@@ -10,26 +10,84 @@
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/element-ui/2.10.1/index.js"></script>
     <script th:src="@{/js/pay/return.js}"></script>
+    <script th:src="@{/js/pay/return_error.js}"></script>
+    <script th:src="@{/js/pay/password.js}"></script>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入组件库 -->
-    <script th:src="@{/js/elementui.min.js}"></script>
+
+    <script th:src="@{js/axios.min.js}"></script>
+    <script th:src="@{js/vue.min.js}"></script>
+    <script th:src="@{js/elementui.min.js}"></script>
+
 </head>
 <body>
 <div id ="app">
+    <div class="password">
+      <el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+        <el-button type="primary" @click.prevent="verify">确认支付</el-button>
 
-<return></return>
+    </div>
+
+
+    <div v-if="show">
+        <el-alert
+                title="支付成功"
+                type="success">
+        </el-alert>
+    </div>
+    <div v-if="show_error">
+        <el-alert
+                title="密码错误！"
+                type="error">
+        </el-alert>
+    </div>
+
 </div>
 </body>
 
 <script>
     new Vue({
         el: '#app',
+        data:{
+            input:"",
+            show:false,
+            show_error:false,
+        },
+        methods:{
+            verify(){
+                var pswd = this.input;
+
+                axios.get("/verify/"+pswd).then(response=>{
+                    this.show = response.data;
+                    this.show_error = !response.data;
+                    console.log(this.show==true);
+                    console.log(this.show_error);
+
+                    if(response.data==true){
+                        setTimeout("javascript:location.href='/'", 500);
+                    }
+                })
+
+
+
+
+
+            }
+
+
+        }
 
     });
 
-</script>
 
+</script>
+<style>
+
+    .password{
+        width: 20%;
+    }
+</style>
 
 
 </html>

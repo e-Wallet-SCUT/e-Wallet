@@ -31,6 +31,6 @@ public interface PayMapper {
     int selectTransaction(int PrimaryID);
 
     //查询账户
-    @Select("select * from account where account_customer_id=#{id}")
+    @Select("select * from account where account_id=#{id}")
     Account selectAccount(@Param("id") Integer id);
 }

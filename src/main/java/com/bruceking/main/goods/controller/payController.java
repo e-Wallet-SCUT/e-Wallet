@@ -9,16 +9,16 @@ import com.bruceking.main.goods.bean.Transaction;
 import com.bruceking.main.loginPage.customer;
 import com.bruceking.main.userInfo.userInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-@RestController
+
+@Controller
 public class payController {
 
     @Autowired
@@ -28,31 +28,10 @@ public class payController {
     private userInfoService userInfoService;
 
 
-    @GetMapping("/payinit/{title}/{price}")
-    public ModelAndView payinit(@PathVariable("title") String title,
-                                @PathVariable("price") String price){
-        String currentUser = userInfoService.getCurrentUser();
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.addObject("username",currentUser);
 
 
-
-        customer user = userInfoService.getUserInfo(currentUser);
-
-        String customer_id = Integer.toString(user.getCustomer_id());
-        modelAndView.addObject("user_id",customer_id);
-        modelAndView.addObject("title",title);
-        modelAndView.addObject("price",price);
-
-        System.out.println(title);
-        modelAndView.setViewName("pay");
-
-        return modelAndView;
-
-    }
     @RequestMapping("/addpay")
-    public ModelAndView pay(Pay pay){
+    public String pay(Pay pay){
 
 
         pay.setPay_date(new Date());
@@ -61,11 +40,11 @@ public class payController {
         ModelAndView mv = new ModelAndView();
         int primaryID = payService.SelectTransaction(Integer.parseInt(pay.getPay_account_id()));
         Account payAccount = payService.selectAccount(primaryID);
+        System.out.println(payAccount.toString());
         Transaction transaction = new Transaction();
 
         if(payAccount.getAccount_balance()<pay.getPay_amount()){
-            mv.addObject("msg", "余额不足！");
-            mv.setViewName("return_error");
+            return "redirect:/return_error";
         }else {
 
             transaction.setTransactionEntityLongId(primaryID);
@@ -76,17 +55,16 @@ public class payController {
             payService.AddPay(pay);
             payService.AddTransaction(transaction);
 
-            mv.addObject("msg", "支付成功");
-            mv.setViewName("return");
+            return "forward:/return";
         }
-        return mv;
+    }
+
+    @RequestMapping("/return")
+    public String toReturn(){
+        System.out.println("aaaa");
+        return "return";
     }
 
 
-    @RequestMapping("/pay/service")
-    public String addPay(@RequestParam(value = "pay_account_id") Integer pay_account_id, Model model){
-        model.addAttribute("pay_account_id",pay_account_id);
-        System.out.println(pay_account_id);
-        return "pay";
-    }
+
 }

@@ -1,10 +1,10 @@
 
 //在这里写新的panel的样式。
-Vue.component("return", {
+Vue.component("return_error", {
     template: `
 <div>
 <el-alert
-    title="余额不足"
+    title="密码错误！"
     type="error">
   </el-alert>
 </div>
@@ -15,24 +15,7 @@ Vue.component("return", {
     data: function () {
 
 
-
-    },
-
-    methods:{ //跳转页面
-
-        hreftwo(){
-
-            this.$router.push({ path:'/'  })
-
-        }
-
-    },
-
-
-    created(){
-        this.hreftwo()
     }
-
 
 
 });
