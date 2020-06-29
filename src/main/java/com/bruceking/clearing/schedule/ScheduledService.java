@@ -12,6 +12,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 定时任务类，在每天的零点执行，用于将transaction表中前一天的transactions轧平成entity表中的各金融机构的头寸
+ */
 @Component
 public class ScheduledService {
     private EntityService entityService;
@@ -33,7 +36,9 @@ public class ScheduledService {
             i.setEntityBalance(i.getEntityBalance().subtract(bigDecimal));
             result.add(i);
         }
-
+        /**
+         * 在这里我直接照抄了EntityController中的getAllAmount方法，显然还需要编写将数据更新至entity表中的方法
+         */
 //        return null;
     }
 }

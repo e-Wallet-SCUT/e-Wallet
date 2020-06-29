@@ -40,6 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
     /**
      * 遍历transaction集合，根据参数entityId计算出该金融实体的头寸
      * @param entityId 某金融实体的id，entity表的主键
+     * @param date  要清算的当天的年月日期
      * @return 返回该头寸
      */
     @Override
