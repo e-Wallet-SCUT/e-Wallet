@@ -3,6 +3,7 @@ package com.bruceking.clearing.schedule;
 import com.bruceking.clearing.pojo.Entity;
 import com.bruceking.clearing.service.EntityService;
 import com.bruceking.clearing.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,11 @@ import java.util.List;
  */
 @Component
 public class ScheduledService {
+
+    @Autowired
     private EntityService entityService;
+
+    @Autowired
     private TransactionService transactionService;
 
     @Scheduled(cron = "0 0 0 * * ?")
@@ -37,9 +42,5 @@ public class ScheduledService {
             entityService.modifyEntity(i);
         }
 
-
-        /**
-         * 在这里我直接照抄了EntityController中的getAllAmount方法，显然还需要编写将数据更新至entity表中的方法
-         */
     }
 }
