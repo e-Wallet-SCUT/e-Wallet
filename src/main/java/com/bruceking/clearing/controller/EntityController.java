@@ -31,25 +31,26 @@ public class EntityController {
     }
 
 
-
-
-
-    @GetMapping("/getAllAmount")
-    public List<Entity> getAllData(){
-        List<Entity> entityList = entityService.findAllEntity();
-        ArrayList<Entity> result = new ArrayList();
-        Date today = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(today);
-        c.add(Calendar.DAY_OF_MONTH,-1);
-        Date yesterday = c.getTime();
-        for(Entity i : entityList){
-            BigDecimal bigDecimal = transactionService.countPosition(i.getEntityId(), yesterday);
-            i.setEntityDayPosition(bigDecimal);
-            i.setEntityBalance(i.getEntityBalance().subtract(bigDecimal));
-            result.add(i);
-        }
-
-        return result;
-    }
+/**
+ * 该方法在清算部分已经用定时任务的方式实现，因此予以废止
+ * 不可再手动进行清算，更新entity表中的各机构头寸
+ */
+//    @GetMapping("/getAllAmount")
+//    public List<Entity> getAllData(){
+//        List<Entity> entityList = entityService.findAllEntity();
+//        ArrayList<Entity> result = new ArrayList();
+//        Date today = new Date();
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(today);
+//        c.add(Calendar.DAY_OF_MONTH,-1);
+//        Date yesterday = c.getTime();
+//        for(Entity i : entityList){
+//            BigDecimal bigDecimal = transactionService.countPosition(i.getEntityId(), yesterday);
+//            i.setEntityDayPosition(bigDecimal);
+//            i.setEntityBalance(i.getEntityBalance().subtract(bigDecimal));
+//            result.add(i);
+//        }
+//
+//        return result;
+//    }
 }

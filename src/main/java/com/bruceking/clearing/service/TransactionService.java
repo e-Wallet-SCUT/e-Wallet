@@ -8,7 +8,10 @@ import java.util.List;
 
 
 public interface TransactionService {
+
     void addTransaction(Transaction transaction);
+
     List<Transaction> findAllTransaction();
+
     BigDecimal countPosition(Integer entityId, Date date);
 }
