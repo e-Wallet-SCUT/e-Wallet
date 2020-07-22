@@ -1,5 +1,7 @@
 package com.bruceking.main.loginPage;
 
+import com.bruceking.main.redis.redisComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,11 +23,14 @@ import java.net.URLConnection;
 public class UsernamePasswordCode extends AbstractAuthenticationProcessingFilter {
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
-    public static final String CODE = "g-recaptcha-response";
+    public static final String CODE = "authCode";
     private String codeParameter = CODE;
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
     private boolean postOnly = true;
+
+    @Autowired(required = false)
+    private redisComponent redisComponent;
 
     public UsernamePasswordCode() {
         super(new AntPathRequestMatcher("/login", "POST"));
@@ -38,11 +43,16 @@ public class UsernamePasswordCode extends AbstractAuthenticationProcessingFilter
         }
         String username = obtainUsername(request);
         String password = obtainPassword(request);
-//        String code = obtainCode(request);
+        String code = obtainCode(request);
 //        String result = sendPost("https://www.recaptcha.net/recaptcha/api/siteverify","secret=6LeR0PsUAAAAAF0CtH0fee2WYfMdFbo0VKiA-qCV&response="+code);
 //        if (!result.contains("\"success\": true")) {
 //            password = null;
 //        }
+//        System.out.println(Integer.parseInt(redisComponent.getKey(username+"-authCode").toString()));
+//        System.out.println(Integer.parseInt(code));
+        if (!code.equals(redisComponent.getKey(username+"-authCode").toString().trim())){
+            password = null;
+        }
         if (username == null) {
             username = "";
         }

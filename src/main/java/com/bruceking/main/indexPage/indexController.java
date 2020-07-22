@@ -1,12 +1,9 @@
 package com.bruceking.main.indexPage;
 
-import com.bruceking.main.authenticator.authCodeSetter;
 import com.bruceking.main.userInfo.userInfoService;
-import com.bruceking.redis.redisComponent;
+import com.bruceking.main.redis.redisComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@ComponentScan("com.bruceking.redis") /**Scan到redis**/
-@EnableScheduling
+@ComponentScan("com.bruceking.main.redis") /**Scan到redis**/
 public class indexController {
 
     @Autowired
     private userInfoService userInfoService;
     @Autowired
     private redisComponent redisComponent;
-
-//    @Autowired
-//    private authCodeSetter authCodeSetter;
 
 
     @RequestMapping("/info")

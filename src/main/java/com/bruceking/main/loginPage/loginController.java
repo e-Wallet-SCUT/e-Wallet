@@ -17,13 +17,13 @@ public class loginController {
         return "login";
     }
 
-    @RequestMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {//清除认证
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        response.sendRedirect("/"); //重定向到首页
-    }
+//    @RequestMapping("/logout")
+//    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null) {//清除认证
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//        response.sendRedirect("/"); //重定向到首页
+//    }
 
 }

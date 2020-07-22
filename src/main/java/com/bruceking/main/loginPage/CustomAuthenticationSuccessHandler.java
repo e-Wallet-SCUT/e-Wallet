@@ -1,6 +1,5 @@
 package com.bruceking.main.loginPage;
 
-import com.bruceking.redis.redisComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private com.bruceking.redis.redisComponent redisComponent;
+    private com.bruceking.main.redis.redisComponent redisComponent;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {

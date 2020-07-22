@@ -40,14 +40,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customerService);
     }
 
-    @Autowired(required = false)
-    CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+//    @Autowired(required = false)
+//    CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     UsernamePasswordCode UsernamePasswordCode() throws Exception {
         UsernamePasswordCode filter = new UsernamePasswordCode();
         filter.setAuthenticationManager(authenticationManagerBean());
-        filter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
+//        filter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
         return filter;
     }
 
@@ -57,12 +57,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-            .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/", "/assets/**","/getSessionID","/getUserInfo","/goodsIndex","/search/**","/auLogin").permitAll()
+            .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/", "/assets/**","/getSessionID","/getUserInfo","/goodsIndex","/search/**","/auLogin","/setAuthCode","/login/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin(form -> form
                     .loginPage("/login")
-                    .permitAll().successHandler(customAuthenticationSuccessHandler)).httpBasic().and().logout().logoutUrl("/logout");
+                    .permitAll()
+//                    .successHandler(customAuthenticationSuccessHandler)
+            ).httpBasic().and().logout().logoutSuccessUrl("/");
         http.addFilterAt(UsernamePasswordCode(), UsernamePasswordAuthenticationFilter.class);
     }
 

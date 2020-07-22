@@ -2,7 +2,6 @@ package com.bruceking.goods.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,11 +9,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@ComponentScan("com.bruceking.redis") /**Scan到redis**/
+@ComponentScan("com.bruceking.main.redis") /**Scan到redis**/
 public class indexController {
 
     @Autowired
-    private com.bruceking.redis.redisComponent redisComponent;
+    private com.bruceking.main.redis.redisComponent redisComponent;
 
     @GetMapping({"/","goodsIndex"})
     public String index(HttpServletRequest httpServletRequest){

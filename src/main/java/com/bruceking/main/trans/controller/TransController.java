@@ -4,7 +4,6 @@ import com.bruceking.main.loginPage.customer;
 import com.bruceking.main.trans.entity.Account;
 import com.bruceking.main.trans.entity.Transfer;
 import com.bruceking.main.trans.service.TransService;
-import com.bruceking.main.userInfo.userInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/trans")
-@ComponentScan("com.bruceking.redis")
+@ComponentScan("com.bruceking.main.redis")
 public class TransController {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.bruceking.redis;
+package com.bruceking.main.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

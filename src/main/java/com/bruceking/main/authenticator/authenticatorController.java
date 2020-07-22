@@ -1,5 +1,6 @@
 package com.bruceking.main.authenticator;
 
+import com.bruceking.main.redis.redisComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +17,9 @@ public class authenticatorController {
     @Autowired
     private authenticatorService authenticatorService;
 
+    @Autowired
+    private redisComponent redisComponent;
+
     @RequestMapping("/auLogin")
     @ResponseBody
     @CrossOrigin
@@ -23,5 +27,13 @@ public class authenticatorController {
         Map<String,Boolean> map = new HashMap<>();
         map.put("result",authenticatorService.checkUserPwd(username,password));
         return map;
+    }
+
+    @RequestMapping("/setAuthCode")
+    @CrossOrigin
+    @ResponseBody
+    public void setAuthCode(@RequestParam("username") String username, @RequestParam("code") String authCode){
+        redisComponent.setKey(username+"-authCode",authCode,20);
+//        System.out.println(redisComponent.getKey(username+"-authCode"));
     }
 }

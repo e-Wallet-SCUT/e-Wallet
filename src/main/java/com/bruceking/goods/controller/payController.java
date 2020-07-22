@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @RestController
-@ComponentScan("com.bruceking.redis") /**Scan到redis**/
+@ComponentScan("com.bruceking.main.redis") /**Scan到redis**/
 public class payController {
 
     @Autowired

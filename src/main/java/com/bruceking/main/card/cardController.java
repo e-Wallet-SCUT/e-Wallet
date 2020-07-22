@@ -1,7 +1,6 @@
 package com.bruceking.main.card;
 
 import com.bruceking.main.loginPage.customer;
-import com.bruceking.main.userInfo.userInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +20,7 @@ public class cardController {
     @Autowired
     private com.bruceking.main.userInfo.userInfoService userInfoService;
     @Autowired
-    private com.bruceking.redis.redisComponent redisComponent;
+    private com.bruceking.main.redis.redisComponent redisComponent;
 
     @RequestMapping("/checkPwd")
     @ResponseBody
