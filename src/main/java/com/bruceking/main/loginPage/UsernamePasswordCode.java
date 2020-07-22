@@ -38,11 +38,11 @@ public class UsernamePasswordCode extends AbstractAuthenticationProcessingFilter
         }
         String username = obtainUsername(request);
         String password = obtainPassword(request);
-        String code = obtainCode(request);
-        String result = sendPost("https://www.recaptcha.net/recaptcha/api/siteverify","secret=6LeR0PsUAAAAAF0CtH0fee2WYfMdFbo0VKiA-qCV&response="+code);
-        if (!result.contains("\"success\": true")) {
-            password = null;
-        }
+//        String code = obtainCode(request);
+//        String result = sendPost("https://www.recaptcha.net/recaptcha/api/siteverify","secret=6LeR0PsUAAAAAF0CtH0fee2WYfMdFbo0VKiA-qCV&response="+code);
+//        if (!result.contains("\"success\": true")) {
+//            password = null;
+//        }
         if (username == null) {
             username = "";
         }
