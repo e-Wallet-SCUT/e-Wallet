@@ -1,19 +1,19 @@
-package com.bruceking.settlement.controller;
+package com.bruceking.main.settlement.controller;
 
+import com.bruceking.main.loginPage.customer;
+import com.bruceking.main.settlement.bean.Transaction;
+import com.bruceking.main.settlement.mapper.EntityMapper;
+import com.bruceking.main.settlement.mapper.TransactionMapper;
 import com.bruceking.main.userInfo.userInfoService;
-import com.bruceking.settlement.bean.Transaction;
-import com.bruceking.settlement.mapper.EntityMapper;
-import com.bruceking.settlement.mapper.TransactionMapper;
-import com.bruceking.settlement.mapper.TransactionRepository;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.math.BigDecimal;
 import java.security.KeyFactory;
 import java.security.Signature;
@@ -36,17 +36,18 @@ public class TransactionController {
     @Resource
     EntityMapper entityMapper;
 
-    @Resource
-    TransactionRepository transactionRepository;
+//    @Resource
+//    TransactionRepository transactionRepository;
 
     @Autowired
     private userInfoService userInfoService;
 
     @GetMapping("/test")
-    public String Test(){
-//        return transactionRepository.findAll();
+    public Integer Test(){
         String username = userInfoService.getCurrentUser();
-        return username;
+        customer user = userInfoService.getUserInfo(username);
+        Integer id = user.getCustomer_id();
+        return id;
     }
 
     @GetMapping("/transaction/{Entity_id}")

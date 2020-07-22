@@ -1,4 +1,4 @@
-package com.bruceking.settlement.bean;
+package com.bruceking.main.settlement.bean;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

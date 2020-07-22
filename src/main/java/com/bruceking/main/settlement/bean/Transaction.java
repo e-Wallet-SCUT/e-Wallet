@@ -1,6 +1,7 @@
-package com.bruceking.settlement.bean;
+package com.bruceking.main.settlement.bean;
 
 import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

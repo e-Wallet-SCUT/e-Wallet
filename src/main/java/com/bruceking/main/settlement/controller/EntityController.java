@@ -1,7 +1,7 @@
-package com.bruceking.settlement.controller;
+package com.bruceking.main.settlement.controller;
 
-import com.bruceking.settlement.bean.Entity;
-import com.bruceking.settlement.mapper.EntityMapper;
+import com.bruceking.main.settlement.bean.Entity;
+import com.bruceking.main.settlement.mapper.EntityMapper;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
