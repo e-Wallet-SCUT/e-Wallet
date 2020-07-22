@@ -12,10 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //customer的一个实体类
-@Data
-@Component
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class customer {
     private int customer_id;
     private String customer_name;
