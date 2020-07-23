@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/", "/assets/**","/getSessionID",
                     "/getUserInfo","/goodsIndex","/search/**","/auLogin","/setAuthCode","/login/**",
-                    "/SignTransaction","insertTransaction","/settlement").permitAll()
+                    "/SignTransaction","insertTransaction").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin(form -> form
