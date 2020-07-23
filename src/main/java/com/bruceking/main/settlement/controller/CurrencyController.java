@@ -14,12 +14,12 @@ public class CurrencyController {
     @Resource
     CurrencyMapper currencyMapper;
 
-    @GetMapping("/currency")
+    @GetMapping("/getCurrency")
     public List<Currency> getAllCurrency(){
         return currencyMapper.getAllCurrency();
     }
 
-    @PostMapping("/update_currency")
+    @PostMapping("/updateCurrency")
     public Boolean update(Currency currency){
         try{
             if(currency.getCurrency_id() != null){

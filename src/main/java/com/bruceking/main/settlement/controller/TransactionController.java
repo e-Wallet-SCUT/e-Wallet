@@ -1,12 +1,18 @@
 package com.bruceking.main.settlement.controller;
 
 import com.bruceking.main.loginPage.customer;
+import com.bruceking.main.settlement.bean.AcSign;
 import com.bruceking.main.settlement.bean.Transaction;
 import com.bruceking.main.settlement.mapper.EntityMapper;
 import com.bruceking.main.settlement.mapper.TransactionMapper;
 import com.bruceking.main.userInfo.userInfoService;
+import com.bruceking.main.settlement.mapper.TransactionRepository;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,40 +42,77 @@ public class TransactionController {
     @Resource
     EntityMapper entityMapper;
 
-//    @Resource
-//    TransactionRepository transactionRepository;
+    @Resource
+    TransactionRepository transactionRepository;
 
     @Autowired
     private userInfoService userInfoService;
 
-    @GetMapping("/test")
-    public Integer Test(){
+    @GetMapping("/getTransactionUser")
+//    @Cacheable(value = "tx")
+    public Integer getTransactionUser(){
         String username = userInfoService.getCurrentUser();
         customer user = userInfoService.getUserInfo(username);
         Integer id = user.getCustomer_id();
+//        Integer id = 2;
         return id;
     }
 
-    @GetMapping("/transaction/{Entity_id}")
+    @GetMapping("/getTransaction")
 //    @Cacheable(value = "tx")
-    public List<Transaction> getTxByEntityId(@PathVariable("Entity_id") Integer Entity_id){
-        List<Transaction> txs =  transactionMapper.getTxByEntityId(Entity_id);
-        return txs;
+    public List<Transaction> getTransactionByEntityId(){
+        String username = userInfoService.getCurrentUser();
+        customer user = userInfoService.getUserInfo(username);
+        Integer id = user.getCustomer_id();
+//        Integer id = 2;
+        return transactionRepository.findByEntityId(id);
     }
 
-    @GetMapping("/transaction/date/{Date}")
-    public List<Transaction> getTxByTime(@PathVariable("Date") String date){
-        List<Transaction> txs =  transactionMapper.getTxByTime(date);
-        return txs;
+    @GetMapping("/getAcTransaction")
+//    @Cacheable(value = "tx")
+    public List<Transaction> getAcTransactionByEntityId(){
+        String username = userInfoService.getCurrentUser();
+        customer user = userInfoService.getUserInfo(username);
+        Integer id = user.getCustomer_id();
+//        Integer id = 2;
+        return transactionRepository.findAcByEntityId(id);
     }
 
-    @GetMapping("/transaction")
-    public List<Transaction> getAllTransaction(){
-        List<Transaction> txs =  transactionMapper.getAllTransaction();
-        return txs;
+    @GetMapping("/getNotAcTransaction")
+//    @Cacheable(value = "tx")
+    public List<Transaction> getNotAcTransactionByEntityId(){
+        String username = userInfoService.getCurrentUser();
+        customer user = userInfoService.getUserInfo(username);
+        Integer id = user.getCustomer_id();
+//        Integer id = 2;
+        return transactionRepository.findNotAcByEntityId(id);
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/SignTransaction")
+    public String signTransaction(AcSign acSign){
+        Transaction transaction = transactionRepository.findByTransactionId(acSign.getTransaction_id());
+
+        Integer entity_id = transaction.getTransaction_to_entity_id();
+        RSAPublicKey publicKey = getPublicKey(entityMapper.getPublicKey(entity_id));
+
+        String signString = transaction.getAcSignString();
+        String sign = acSign.getTransaction_ac_sign().replace(' ','+');
+
+        if(sign.equals("AutoSign")){
+            RSAPrivateKey privateKey = getPrivateKey(entityMapper.getPrivateKey(entity_id));
+            sign = getSign(signString, privateKey);
+        }
+
+        if (!verify(signString, sign, publicKey))
+            return "签名验证失败";
+
+        Date time = new Date();
+
+        transactionMapper.updateTransactionAcSign(transaction.getTransaction_id(),sign,time);
+        return "验证成功";
+    }
+
+    @PostMapping("/insertTransaction")
     public String insert(Transaction transaction){
         Integer entity_id = transaction.getTransaction_from_entity_id();
         RSAPublicKey publicKey = getPublicKey(entityMapper.getPublicKey(entity_id));
@@ -104,6 +147,17 @@ public class TransactionController {
         return "插入成功"+transaction.toString();
     }
 
+    @GetMapping("/transaction/date/{Date}")
+    public List<Transaction> getTxByTime(@PathVariable("Date") String date){
+        List<Transaction> txs =  transactionMapper.getTxByTime(date);
+        return txs;
+    }
+
+    @GetMapping("/transaction")
+    public List<Transaction> getAllTransaction(){
+        List<Transaction> txs =  transactionMapper.getAllTransaction();
+        return txs;
+    }
 
     public RSAPublicKey getPublicKey(String publicKey){
         try {

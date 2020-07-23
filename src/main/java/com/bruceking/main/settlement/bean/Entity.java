@@ -12,7 +12,8 @@ public class Entity {
     private String entity_name;
     private Integer currency_id;
     private BigDecimal currency_amount;
+    private BigDecimal currency_yesterday_stm;
     private String public_key;
     private String private_key;
-    private String username;
+    private Integer user_id;
 }

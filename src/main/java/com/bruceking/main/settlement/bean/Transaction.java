@@ -25,26 +25,10 @@ public class Transaction {
     private Date transaction_time;
     private Date transaction_send_time;
     private String transaction_sign;
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "transaction_id=" + transaction_id +
-                ", transaction_from_entity_id=" + transaction_from_entity_id +
-                ", transaction_from_entity_account='" + transaction_from_entity_account + '\'' +
-                ", transaction_to_entity_id=" + transaction_to_entity_id +
-                ", transaction_to_entity_account='" + transaction_to_entity_account + '\'' +
-                ", transaction_currency_amount=" + transaction_currency_amount +
-                ", transaction_currency_fee=" + transaction_currency_fee +
-                ", transaction_currency_id=" + transaction_currency_id +
-                ", transaction_time=" + transaction_time +
-                ", transaction_send_time=" + transaction_send_time +
-                ", transaction_sign='" + transaction_sign + '\'' +
-                '}';
-    }
+    private String transaction_ac_sign;
 
     public String getSignString() {
-        return "Transaction{" +
+        return "SignString{" +
                 "transaction_from_entity_id=" + transaction_from_entity_id +
                 ", transaction_from_entity_account='" + transaction_from_entity_account + '\'' +
                 ", transaction_to_entity_id=" + transaction_to_entity_id +
@@ -52,6 +36,13 @@ public class Transaction {
                 ", transaction_currency_amount=" + transaction_currency_amount +
                 ", transaction_currency_id=" + transaction_currency_id +
                 ", transaction_send_time=" + transaction_send_time +
+                '}';
+    }
+
+    public String getAcSignString(){
+        return "AcSignString{" +
+                "transaction_id=" + transaction_id +
+                ", transaction_sign='" + transaction_sign + '\'' +
                 '}';
     }
 }

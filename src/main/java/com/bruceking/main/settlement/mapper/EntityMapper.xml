@@ -22,6 +22,11 @@
         SELECT * FROM `exentity`
     </select>
 
+    <insert id="insertEntity">
+        INSERT INTO `exentity`(entity_id,entity_name,currency_id,currency_amount,currency_yesterday_stm,public_key,private_key,user_id)
+        VALUES(#{entity_id},#{entity_name},#{currency_id},#{currency_amount},#{currency_yesterday_stm},#{public_key},#{private_key},#{user_id})
+	</insert>
+
 
     <insert id="updateCurrencyAmount">
         UPDATE exentity SET currency_amount = #{currency_amount} WHERE
