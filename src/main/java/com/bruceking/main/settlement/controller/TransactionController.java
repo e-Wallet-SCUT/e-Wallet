@@ -147,17 +147,17 @@ public class TransactionController {
         return "插入成功"+transaction.toString();
     }
 
-    @GetMapping("/transaction/date/{Date}")
-    public List<Transaction> getTxByTime(@PathVariable("Date") String date){
-        List<Transaction> txs =  transactionMapper.getTxByTime(date);
-        return txs;
-    }
+//    @GetMapping("/transaction/date/{Date}")
+//    public List<Transaction> getTxByTime(@PathVariable("Date") String date){
+//        List<Transaction> txs =  transactionMapper.getTxByTime(date);
+//        return txs;
+//    }
 
-    @GetMapping("/transaction")
-    public List<Transaction> getAllTransaction(){
-        List<Transaction> txs =  transactionMapper.getAllTransaction();
-        return txs;
-    }
+//    @GetMapping("/transaction")
+//    public List<Transaction> getAllTransaction(){
+//        List<Transaction> txs =  transactionMapper.getAllTransaction();
+//        return txs;
+//    }
 
     public RSAPublicKey getPublicKey(String publicKey){
         try {
