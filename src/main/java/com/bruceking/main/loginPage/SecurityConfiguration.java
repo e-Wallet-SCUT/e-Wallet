@@ -26,6 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -68,6 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                    .successHandler(customAuthenticationSuccessHandler)
             ).httpBasic().and().logout().logoutSuccessUrl("/");
         http.addFilterAt(UsernamePasswordCode(), UsernamePasswordAuthenticationFilter.class);
+        http.headers().frameOptions().disable();
     }
 
 }

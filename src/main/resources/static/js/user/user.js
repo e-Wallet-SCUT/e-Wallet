@@ -48,6 +48,10 @@ Vue.component('userInfo', {
     template:"#userInfoTem"
 })
 
+Vue.component('bill',{
+    template:"#bill"
+})
+
 
 new Vue({
     el:"#app",

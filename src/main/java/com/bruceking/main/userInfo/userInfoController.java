@@ -43,7 +43,9 @@ public class userInfoController {
 
     @RequestMapping("/user/{username}")
     public String userPage(Model model, @PathVariable String username){
+        Integer id = userInfoService.getUserInfo(username).getCustomer_id();
         model.addAttribute("username",username);
+        model.addAttribute("payid",id);
         return "userPage";
     }
 

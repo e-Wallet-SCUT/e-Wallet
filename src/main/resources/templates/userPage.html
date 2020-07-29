@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <frame-options policy="SAMEORIGIN" />
 <title>E-Wallet个人中心</title>
 <link th:href="@{/css/user/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/user/materialdesignicons.min.css}" rel="stylesheet">
@@ -32,9 +33,9 @@
               </ul>
             </li>
             <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 账单查询</a>
+              <a href="javascript:void(0)"><i class="mdi mdi-format-align-justify"></i> 查询</a>
               <ul class="nav nav-subnav">
-                <li> <a href="#">待编辑</a> </li>
+                <li> <a @click.prevent="comName='bill'">账单</a> </li>
               </ul>
             </li>
           </ul>
@@ -188,6 +189,10 @@
     </div>
 
   </div>
+</template>
+
+<template id="bill">
+  <iframe th:src="${'/bill/'+payid}" style="width: 1000px;height: 500px"></iframe>
 </template>
 <!--      -->
 
