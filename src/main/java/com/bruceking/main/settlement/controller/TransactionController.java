@@ -163,7 +163,7 @@ public class TransactionController {
         transaction.setTransaction_currency_fee(fee_rate.multiply(transaction.getTransaction_currency_amount()));
 
         long delta = new Date().getTime() - transaction.getTransaction_send_time().getTime();
-        if (delta > 1800000){
+        if (Math.abs(delta) > 1800000){
             return "交易超时，插入失败";
         }
 

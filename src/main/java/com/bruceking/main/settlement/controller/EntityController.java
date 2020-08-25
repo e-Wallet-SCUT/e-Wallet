@@ -64,7 +64,7 @@ public class EntityController {
 //        Integer id = 2;
         System.out.println(charge.toString());
         Entity entity = entityMapper.getEntityByEntityId(id).stream().findFirst().orElse(null);
-        if(entity.getCurrency_amount().compareTo(charge.getValue()) == -1){
+        if(entity.getCurrency_amount().compareTo(charge.getValue()) == -1 || entity.getCurrency_amount().add(entity.getCurrency_used()).compareTo(charge.getValue()) == -1){
             return "余额不足";
         }
         BigDecimal bigDecimal = entity.getCurrency_amount().subtract(charge.getValue());
