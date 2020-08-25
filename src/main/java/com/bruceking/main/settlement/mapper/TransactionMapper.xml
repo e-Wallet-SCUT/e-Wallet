@@ -12,6 +12,14 @@
         SELECT * FROM `extransaction`
     </select>
 
+    <select id="getAllTransactionByDate" resultType="com.bruceking.main.settlement.bean.Transaction">
+        SELECT * FROM `extransaction` WHERE transaction_send_time > #{start} AND transaction_send_time &gt; #{end}
+    </select>
+
+    <select id="getAllNotVerifyTransaction" resultType="com.bruceking.main.settlement.bean.Transaction">
+        SELECT * FROM `extransaction` WHERE transaction_status = 0
+    </select>
+
     <select id="getTxByTime" resultType="com.bruceking.main.settlement.bean.Transaction">
         SELECT * FROM `extransaction` WHERE
             date(transaction_time)=#{date};
@@ -23,12 +31,16 @@
     </select>
 
     <insert id="insertTx">
-        INSERT INTO `extransaction`(transaction_from_entity_id,transaction_from_entity_account,transaction_to_entity_id,transaction_to_entity_account,transaction_currency_amount,transaction_currency_fee,transaction_currency_id,transaction_send_time,transaction_sign)
-        VALUES(#{transaction_from_entity_id},#{transaction_from_entity_account},#{transaction_to_entity_id},#{transaction_to_entity_account},#{transaction_currency_amount},#{transaction_currency_fee},#{transaction_currency_id},#{transaction_send_time},#{transaction_sign})
+        INSERT INTO `extransaction`(transaction_from_entity_id,transaction_from_entity_account,transaction_to_entity_id,transaction_to_entity_account,transaction_currency_amount,transaction_currency_fee,transaction_currency_id,transaction_send_time,transaction_sign,transaction_status)
+        VALUES(#{transaction_from_entity_id},#{transaction_from_entity_account},#{transaction_to_entity_id},#{transaction_to_entity_account},#{transaction_currency_amount},#{transaction_currency_fee},#{transaction_currency_id},#{transaction_send_time},#{transaction_sign},#{transaction_status})
     </insert>
 
     <update id="updateTransactionAcSign">
-        update extransaction set transaction_ac_sign = #{sign}, transaction_time = #{time} where  transaction_id = #{id}
+        update extransaction set transaction_ac_sign = #{sign}, transaction_time = #{time},transaction_status = #{status} where  transaction_id = #{id}
+    </update>
+
+    <update id="updateTransactionStatus">
+        update extransaction set transaction_status = #{status} where  transaction_id = #{id}
     </update>
 </mapper>
 

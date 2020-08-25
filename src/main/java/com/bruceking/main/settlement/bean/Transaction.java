@@ -26,6 +26,7 @@ public class Transaction {
     private Date transaction_send_time;
     private String transaction_sign;
     private String transaction_ac_sign;
+    private Integer transaction_status;
 
     public String getSignString() {
         return "SignString{" +

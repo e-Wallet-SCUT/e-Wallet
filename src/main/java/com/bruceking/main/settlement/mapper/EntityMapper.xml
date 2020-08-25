@@ -37,5 +37,16 @@
         UPDATE exentity SET currency_yesterday_stm = #{currency_yesterday_stm} WHERE
             entity_id = #{entity_id}
 	</insert>
+
+    <select id="getCurrencyUsed" resultType="java.math.BigDecimal">
+        SELECT currency_used FROM `exentity` WHERE
+            entity_id = #{entity_id}
+    </select>
+
+    <insert id="updateCurrencyUsed">
+        UPDATE exentity SET currency_used = #{used} WHERE
+            entity_id = #{entity_id}
+	</insert>
+
 </mapper>
 

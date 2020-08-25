@@ -15,9 +15,15 @@ public interface TransactionMapper {
 
     public List<Transaction> getAllTransaction();
 
+    public List<Transaction> getAllTransactionByDate(Date start, Date end);
+
+    public List<Transaction> getAllNotVerifyTransaction();
+
     public Transaction checkSign(String transaction_sign);
 
     public void insertTx(Transaction transaction);
 
-    void updateTransactionAcSign(Integer id, String sign, Date time);
+    void updateTransactionAcSign(Integer id, String sign, Date time, Integer status);
+
+    void updateTransactionStatus(Integer id, Integer status);
 }

@@ -7,6 +7,7 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Date;
 //        DataSourceAutoConfiguration.class,
 //        DataSourceTransactionManagerAutoConfiguration.class,
 //        HibernateJpaAutoConfiguration.class})
+@EnableScheduling
 @SpringBootApplication
 public class MainApplication{
 

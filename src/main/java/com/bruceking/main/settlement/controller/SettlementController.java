@@ -6,6 +6,7 @@ import com.bruceking.main.settlement.bean.Transaction;
 import com.bruceking.main.settlement.mapper.CurrencyMapper;
 import com.bruceking.main.settlement.mapper.EntityMapper;
 import com.bruceking.main.settlement.mapper.TransactionMapper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class SettlementController {
 
     @GetMapping("stm")
     @Transactional
-//    @Scheduled(cron = "0 0 1 ? * * ")
+    @Scheduled(cron = "0 0 1 ? * * ")
     public String stm(){
         List<Currency> currencies = currencyMapper.getAllCurrency();
         BigDecimal exchangeRate[] = new BigDecimal[currencies.size()+1];
@@ -73,5 +74,16 @@ public class SettlementController {
             entityMapper.updateCurrencyYesterdayStm(i, result[i]);
         }
         return "success!";
+    }
+
+    @GetMapping("cv")
+    @Scheduled(cron = "0 0/30 0/1 * * ? ")
+    public void CloseTransaction(){
+        List<Transaction> allNotVerifyTransaction = transactionMapper.getAllNotVerifyTransaction();
+        for (Transaction tx : allNotVerifyTransaction){
+            if(new Date().getTime() - tx.getTransaction_send_time().getTime() > 7200000){
+                transactionMapper.updateTransactionStatus(tx.getTransaction_id(), -1);
+            }
+        }
     }
 }

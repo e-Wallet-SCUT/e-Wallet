@@ -23,4 +23,10 @@ public interface EntityMapper {
     public void updateCurrencyAmount(int entity_id, BigDecimal currency_amount);
 
     public void updateCurrencyYesterdayStm(int entity_id, BigDecimal currency_yesterday_stm);
+
+    public BigDecimal getCurrencyUsed(int entity_id);
+
+    public void updateCurrencyUsed(int entity_id, BigDecimal used);
+
+
 }

@@ -53,8 +53,25 @@ public class EntityController {
         Entity entity = entityMapper.getEntityByEntityId(id).stream().findFirst().orElse(null);
         BigDecimal bigDecimal = entity.getCurrency_amount().add(charge.getValue());
         entityMapper.updateCurrencyAmount(id,bigDecimal);
-        return "success!";
+        return "充值成功";
     }
+
+    @PostMapping("/entityWithdraw")
+    public String withdraw(@RequestBody Charge charge){
+        String username = userInfoService.getCurrentUser();
+        customer user = userInfoService.getUserInfo(username);
+        Integer id = user.getCustomer_id();
+//        Integer id = 2;
+        System.out.println(charge.toString());
+        Entity entity = entityMapper.getEntityByEntityId(id).stream().findFirst().orElse(null);
+        if(entity.getCurrency_amount().compareTo(charge.getValue()) == -1){
+            return "余额不足";
+        }
+        BigDecimal bigDecimal = entity.getCurrency_amount().subtract(charge.getValue());
+        entityMapper.updateCurrencyAmount(id,bigDecimal);
+        return "提现成功";
+    }
+
 
     @PostMapping("/insertEntity")
     public String insert(Entity entity){
@@ -74,7 +91,7 @@ public class EntityController {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        keyPairGen.initialize(512,new SecureRandom());
+        keyPairGen.initialize(1024,new SecureRandom());
         KeyPair keyPair = keyPairGen.generateKeyPair();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
