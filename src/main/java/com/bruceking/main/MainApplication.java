@@ -1,5 +1,7 @@
 package com.bruceking.main;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
@@ -25,15 +27,15 @@ public class MainApplication{
         SpringApplication.run(MainApplication.class, args);
     }
 
-    @Bean
-    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> myCustomizer(){
-        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
-            @Override
-            public void customize(ConfigurableWebServerFactory factory) {
-                factory.setPort(80);
-            }
-        };
-    }
+//    @Bean
+//    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> myCustomizer(){
+//        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
+//            @Override
+//            public void customize(ConfigurableWebServerFactory factory) {
+//                factory.setPort(80);
+//            }
+//        };
+//    }
 
     @Bean
     public Converter<String, Date> addNewConvert() {
