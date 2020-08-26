@@ -33,7 +33,6 @@ public class authenticatorController {
     @CrossOrigin
     @ResponseBody
     public void setAuthCode(@RequestParam("username") String username, @RequestParam("code") String authCode){
-        System.out.println(username+","+authCode);
         redisComponent.setKey(username+"-authCode",authCode,20);
 //        System.out.println(redisComponent.getKey(username+"-authCode"));
     }
