@@ -29,9 +29,8 @@ public class SettlementController {
 
     private final int fee_account = 1;
 
-    @GetMapping("stm")
     @Transactional
-    @Scheduled(cron = "0 0 1 ? * * ")
+    @Scheduled(cron = "0 30 2 * * ? ")
     public String stm(){
         List<Currency> currencies = currencyMapper.getAllCurrency();
         BigDecimal exchangeRate[] = new BigDecimal[currencies.size()+1];
@@ -55,12 +54,15 @@ public class SettlementController {
         c.add(Calendar.DAY_OF_MONTH, -1);
         date = c.getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        List<Transaction> txs = transactionMapper.getTxByTime(format.format(date));
-        List<Transaction> txs = transactionMapper.getTxByTime("2020-06-29");
+        List<Transaction> txs = transactionMapper.getTxByTime(format.format(date));
+//        List<Transaction> txs = transactionMapper.getTxByTime("2020-06-29");
 
 
 
         for(Transaction tx : txs){
+            if(tx.getTransaction_status() != 1){
+                continue;
+            }
             int from = tx.getTransaction_from_entity_id(), to = tx.getTransaction_to_entity_id(), type = tx.getTransaction_currency_id();
             BigDecimal amount = tx.getTransaction_currency_amount();
             result[from] = result[from].subtract(amount.divide(exchangeRate[type], 4).multiply(exchangeRate[currencyType[from]]));
@@ -72,6 +74,7 @@ public class SettlementController {
         for(int i=1; i<=entities.size();i++){
             entityMapper.updateCurrencyAmount(i, result[i].add(currencyAmount[i]));
             entityMapper.updateCurrencyYesterdayStm(i, result[i]);
+            entityMapper.updateCurrencyUsed(i,new BigDecimal(0));
         }
         return "success!";
     }
