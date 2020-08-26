@@ -9,4 +9,8 @@ public class PageController {
     public String index(){
         return "settlement";
     }
+    @GetMapping("/settlementInner")
+    public String inner(){
+        return "settlementInner";
+    }
 }

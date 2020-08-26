@@ -1,1 +1,113 @@
-<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=/favicon.ico><title>清算中心</title><link href=/css/app.09120c58.css rel=preload as=style><link href=/css/chunk-vendors.2ac5db4b.css rel=preload as=style><link href=/js/app.65ae5546.js rel=preload as=script><link href=/js/chunk-vendors.63c8c553.js rel=preload as=script><link href=/css/chunk-vendors.2ac5db4b.css rel=stylesheet><link href=/css/app.09120c58.css rel=stylesheet></head><body><noscript><strong>We're sorry but vuetest doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=/js/chunk-vendors.63c8c553.js></script><script src=/js/app.65ae5546.js></script></body></html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>清算中心</title>
+
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<script th:src="@{/js/jquery.min.js}"></script>
+<!--	<link rel="stylesheet" href="css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<script src="js/bootstrap.min.js"></script>
+<!--	<style type="text/css">-->
+<!--		.a{-->
+<!--			/*右对齐*/-->
+<!--			display: inline-block;-->
+<!--			float: left;-->
+<!--			width: 300px;-->
+<!--			height: 40px;-->
+<!--			text-align: left;-->
+<!--			margin-left: 15em;-->
+<!--		}-->
+<!--	</style>-->
+
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+	<style type="text/css">
+		/* Chart.js */
+		.a{
+			margin-left: 15em;
+		}
+		@-webkit-keyframes chartjs-render-animation {
+			from {
+				opacity: 0.99
+			}
+			to {
+				opacity: 1
+			}
+		}
+
+		@keyframes chartjs-render-animation {
+			from {
+				opacity: 0.99
+			}
+			to {
+				opacity: 1
+			}
+		}
+
+		.chartjs-render-monitor {
+			-webkit-animation: chartjs-render-animation 0.001s;
+			animation: chartjs-render-animation 0.001s;
+		}
+
+		body, html {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<img alt="Brand" th:src="@{images/logo.png}">
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="/">首页</a></li>
+						<li><a href="/goodsIndex">网上商城</a></li>
+						<li><a href="/trans">转账</a></li>
+						<li><a href="/settlement">清算</a></li>
+						<li><a href="/withdraw">提现</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								Signed in as <span th:text="${username}"></span><span class="caret" ></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a th:href="${'/user/'+username}">用户中心</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="/logout">注销</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+<!--	<div class="container-fluid">-->
+<!--		<div class="row">-->
+<!--			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">-->
+<!--				<iframe src="/settlementInner" frameborder="0" width="100%" scrolling="No" height="100%" leftmargin="0" topmargin="0"></iframe>-->
+<!--			</main>-->
+
+<!--		</div>-->
+<!--	</div>-->
+
+	<div>
+				<iframe src="/settlementInner" frameborder="0" width="100%" scrolling="yes" height="840"></iframe>
+	</div>
+
+
+</body>
+
+</html>
