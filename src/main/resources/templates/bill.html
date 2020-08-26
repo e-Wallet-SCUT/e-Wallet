@@ -52,11 +52,11 @@
 							<form th:action="@{'/bill/'+${payid}}" method="post">
 								<div class="form-group">
 									<label >起始日期</label>
-									<input type="text" class="form-control" id="exampleInputDate1" name="BeginDate"  placeholder="2020/7/24" th:value="${Begin!=null}?${Begin}">
+									<input type="text" class="form-control" id="exampleInputDate1" name="BeginDate"  placeholder="样式: 年/月/日" th:value="${Begin!=null}?${Begin}">
 								</div>
 								<div class="form-group">
 									<label >截止日期</label>
-									<input type="text" class="form-control" id="exampleInputDate2" name="EndDate" placeholder="2020/7/24" th:value="${End!=null}?${End}">
+									<input type="text" class="form-control" id="exampleInputDate2" name="EndDate" placeholder="样式: 年/月/日" th:value="${End!=null}?${End}">
 									<small id="emailHelp" class="form-text text-muted">使用以上功能可以按照日期查询账单,必须同时输入起始和截至日期</small>
 								</div>
 								<button type="submit" class="btn btn-primary">查询</button>
